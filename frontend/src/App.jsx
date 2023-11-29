@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import Navbar from './components/Navbar'
 import './App.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+import Home from './views/Home/Home'
+import Footer from './components/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      {count}
-      <button onClick={() => setCount(count + 1)}>gg</button>
+      <Navbar />
+      <Home />
+      <Footer />
     </>
   )
 }
