@@ -19,9 +19,6 @@ const Navbar = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="#">About me</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Contact</a>
-                        </li>
                     </ul>
                     <div className="buttons">
                         <a href="" className="btn btn-outline-dark "><FontAwesomeIcon icon={faArrowRightToBracket} className='me-1' />Login</a>
