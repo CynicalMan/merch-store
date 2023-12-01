@@ -1,6 +1,12 @@
 import bgImg from '../../assets/home/bg.jpg'
+import { getProducts } from '../../helper/helper';
 import ProductList from './components/ProductList'
 
+export async function loader() {
+    const products = await getProducts();
+    console.log(products);
+    return {products};
+}
 
 const Home = () => {
     return (

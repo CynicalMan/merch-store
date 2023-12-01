@@ -1,41 +1,29 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
+import { LoadingProducts, ShowProducts } from "../../../helper/helper";
+import { useLoaderData } from "react-router-dom";
+import { getProducts } from "../../../helper/helper";
+
+export async function loader() {
+    const products = await getProducts();
+    return {products};
+}
 
 const ProductList = () => {
+    const { products } = useLoaderData();
 
-    const [products, setProducts] = useState({
-        loading: false,
-        results: [],
-        err: null,
-    });
-
-    useEffect(() => {
-        setProducts({ ...products, loading: true })
-        axios
-            .get("https://fakestoreapi.com/products")
-            .then((res) => {
-                console.log(res);
-                setProducts({ ...products, results: res.data, loading: false, err: null });
-                const product = res.data[0]
-                console.log(product);
-            })
-            .catch((err) => {
-                console.log(err);
-                setProducts({ ...products, err: "something went wrong : " + err, loading: false });
-            });
-
-    }, []);
 
     return (
         <>
-            <div className="container">
+            <div className="container my-5 py-5">
                 <div className="row">
-                    <div className="col-12">
-                        <h1>
+                    <div className="col-12 mb-5">
+                        <h1 className="display-6 fw-bolder text-center">
                             Latest Products
                         </h1>
-
+                        <hr />
                     </div>
+                </div>
+                <div className="row justify-content">
+                    {!products ? <LoadingProducts /> : <ShowProducts results={products} />}
                 </div>
             </div>
         </>
