@@ -4,7 +4,7 @@ import Bgimg from "../../assets/Sign/470x800.png"
 import React, { useEffect } from "react";
 import { useRef  } from "react";
 import {useFetcher} from "react-router-dom";
-import { Signup } from "../../helper/helper";
+
 
 export async function signupAction({ request }) {
   const data = await request.formData();
@@ -19,25 +19,14 @@ export async function signupAction({ request }) {
 
         })
       } catch (e) {
-          throw new Error("There was a problem in sign up " + e);
+          throw new Error("There was a problem in sign up" + e);
       }
   }
 }
 
 
 const Signup = () => {
-  const fetcher = useFetcher();
-  const isSubmitting = fetcher.state === "submitting";
-  const formRef = useRef()
-  const focusRef = useRef()
-
-
-  useEffect(()=>{
-    if(!isSubmitting){
-      formRef.current.reset();
-      focusRef.current.focus();
-    }
-  },[isSubmitting]);
+  
   
   return (
     <div className="h-100vh w-75 m-auto mt-5">
@@ -46,7 +35,7 @@ const Signup = () => {
           <main className="form-signin d-flex justify-content-center align-items-around p-0 bg-white w-100 rounded-1">
             <div className="col-md-6 text-bg-light d-flex justify-content-center align-items-center bg-white">
               <div className="d-flex justify-content-center align-items-center bg-white">
-                <fetcher.Form method="post"  className="p-4" ref = {formRef} >
+                <form method="post"  className="p-4" ref = {formRef} >
                   {/* Action  */}
                   <h1 className="py-3">Sign up</h1>
                   <div className="form-floating mb-3">
@@ -115,7 +104,7 @@ const Signup = () => {
                       Sign in.
                     </a>
                   </p>
-                </fetcher.Form>
+                </form>
               </div>
             </div>
             <div className="col-md-6 h-100 overflow-hidden">

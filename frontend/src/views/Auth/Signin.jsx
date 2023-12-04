@@ -23,17 +23,7 @@ export async function signinAction({request}){
   }
 }
 const Signin = () => {
-  const fetcher = useFetcher();
-  const isSubmitting = fetcher.state === "submitting";
-  const formRef = useRef();
-  const focusRef = useRef();
-
-  useEffect(()=>{
-    if(!isSubmitting){
-      formRef.current.reset();
-      focusRef.current.focus();
-    }
-  },[isSubmitting])
+  
 
   return (
     <div className=" h-100vh w-75 m-auto mt-5 ">
@@ -45,7 +35,7 @@ const Signin = () => {
          </div>
          <div className="col-md-6 text-bg-light d-flex justify-content-center align-items-center bg-white">
          <div className="d-flex justify-content-center align-items-center bg-white">
-         <fetcher.Form method= "get" ref={formRef}>
+         <form method= "get" ref={formRef}>
             <h1>Login</h1>
             <div className="form-floating mb-3 px-3">
               <input 
@@ -77,7 +67,7 @@ const Signin = () => {
               Sign in
             </button>
             <p className="text-muted">Doesn't have an account ? <a className= "link-offset-2 link-underline link-underline-opacity-0" href="">Sign up.</a></p>
-         </fetcher.Form>
+         </form>
          </div>
          </div>
         </main>

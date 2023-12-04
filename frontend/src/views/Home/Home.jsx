@@ -1,4 +1,5 @@
 import bgImg from '../../assets/home/bg.jpg'
+import Cart from '../Cart/Cart'
 import ProductList from './components/ProductList'
 
 
@@ -15,7 +16,7 @@ const Home = () => {
                 </div>
             </div>
             <ProductList />
-            
+            <Cart/>
         </div>
     )
 }

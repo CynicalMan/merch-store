@@ -6,16 +6,18 @@ import Footer from './components/Footer'
 import Signin from './views/Auth/Signin'
 import Signup from './views/Auth/Signup'
 import About from './views/About/About'
+import Cart from './views/Cart/Cart'
 function App() {
 
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Home /> */}
+      <Navbar />
+      <Home />
       {/* <About/> */}
-      <Signup/>
+      {/* <Signup/> */}
       {/* <Signin/> */}
       {/* <Footer /> */}
+
     </>
   )
 }
