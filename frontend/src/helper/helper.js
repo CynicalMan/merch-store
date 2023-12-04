@@ -1,4 +1,6 @@
-export const Signup = ({
+import axios from "axios"
+
+export const SignupPost = ({
     email , password
 })=>{
     const userData = {
@@ -15,3 +17,4 @@ export const Auth = ({email , password}) =>{
     }
     const response = axios.post("localhost",userData);
 }
+

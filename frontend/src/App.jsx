@@ -8,7 +8,7 @@ import Signup from './views/Auth/Signup'
 import About from './views/About/About'
 import Cart from './views/Cart/Cart'
 
-import { getProducts } from './helper/helper'
+import { getProducts } from "./helper/compHelper"
 
 export async function loader() {
   const products = await getProducts();
@@ -21,9 +21,9 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet /> 
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

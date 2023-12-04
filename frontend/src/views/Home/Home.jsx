@@ -1,6 +1,6 @@
 import bgImg from '../../assets/home/bg.jpg'
 import Cart from '../Cart/Cart'
-import { getProducts } from '../../helper/helper';
+import { getProducts } from '../../helper/compHelper';
 import ProductList from './components/ProductList'
 
 export async function loader() {

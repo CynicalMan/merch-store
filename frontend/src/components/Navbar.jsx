@@ -28,9 +28,9 @@ const Navbar = () => {
 
                     </ul>
                     <div className="buttons">
-                        <a className="btn btn-outline-dark "><FontAwesomeIcon icon={faArrowRightToBracket} className='me-1' />Login</a>
-                        <a className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faUserPlus} className='me-1' />Register</a>
-                        <a className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faCartShopping}  className='me-1' />Cart ({product.length})</a>
+                        <Link to={"/signup"} className="btn btn-outline-dark"><FontAwesomeIcon icon={faUserPlus}  />Register</Link>
+                        <Link to={"/signin"} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faArrowRightToBracket} />Login</Link>
+                        <a className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faCartShopping}   />Cart ({product.length})</a>
                     </div>
                 </div>
             </div>

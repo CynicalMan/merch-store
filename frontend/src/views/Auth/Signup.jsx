@@ -4,6 +4,7 @@ import Bgimg from "../../assets/Sign/470x800.png"
 import React, { useEffect } from "react";
 import { useRef  } from "react";
 import {useFetcher} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export async function signupAction({ request }) {
@@ -35,7 +36,7 @@ const Signup = () => {
           <main className="form-signin d-flex justify-content-center align-items-around p-0 bg-white w-100 rounded-1">
             <div className="col-md-6 text-bg-light d-flex justify-content-center align-items-center bg-white">
               <div className="d-flex justify-content-center align-items-center bg-white">
-                <form method="post"  className="p-4" ref = {formRef} >
+                <form method="post"  className="p-4" >
                   {/* Action  */}
                   <h1 className="py-3">Sign up</h1>
                   <div className="form-floating mb-3">
@@ -46,7 +47,6 @@ const Signup = () => {
                       name= "email"
                       required
                       placeholder="Email"
-                      ref = {focusRef}
                     />  
                   </div>
                   <div className="form-floating mb-3">
@@ -56,7 +56,6 @@ const Signup = () => {
                       id="passwordId"
                       name= "password"
                       required
-                      ref={(ref)=> (formData.current["password"] = ref)}
                       placeholder="Password"
                     />                
                   </div>
@@ -91,18 +90,16 @@ const Signup = () => {
                   <button
                     type="submit"
                     className="w-75 btn btn-sm btn-dark mt-5 py-2 mx-auto"
-                    disabled={isSubmitting}
                   >
                     Sign up
                   </button>
                   <p className="text-muted">
                     Have an account?{" "}
-                    <a
+                    <Link to = {"/signin"}
                       className="link-offset-2 link-underline link-underline-opacity-0"
-                      href=""
                     >
                       Sign in.
-                    </a>
+                    </Link>
                   </p>
                 </form>
               </div>

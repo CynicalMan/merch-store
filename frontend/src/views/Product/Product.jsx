@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { LoadingProduct, ShowProduct, getProduct } from "../../helper/helper";
+import { LoadingProduct, ShowProduct, getProduct } from "../../helper/compHelper";
 
 
 export async function loader({params}) {

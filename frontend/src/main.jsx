@@ -9,6 +9,8 @@ import ProductList, {loader as productsLoader} from './views/Home/components/Pro
 import Product, {loader as productLoader} from './views/Product/Product.jsx'
 import {Provider} from "react-redux"
 import { store } from './redux/store.js'
+import Signin from './views/Auth/Signin.jsx'
+import Signup  from './views/Auth/Signup.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
         path: "/products/:id",
         element: <Product />,
         loader: productLoader
+      },
+      {
+        path: "/signin",
+        element: <Signin />
+      },
+      {
+        path: "/signup",
+        element: <Signup />
       },
     ]
   },
