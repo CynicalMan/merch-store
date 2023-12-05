@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import CategoryData from "../models/Category.js";
 
 const Schema = mongoose.Schema;
 const itemSchema = new Schema({
@@ -19,10 +18,10 @@ const itemSchema = new Schema({
     type:Number,
     required:true,
   },
-//   media: {
-//     type: [String],
-//     required: true,
-//   },
+  media: {
+    type: [String],
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("items", itemSchema);

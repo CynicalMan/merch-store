@@ -1,5 +1,5 @@
-const express = require('express');
-const { addItem , getItems, updateItem ,deleteItem } = require('../controllers/itemsController');
+import express from "express";
+import { addItem , getItems, updateItem ,deleteItem } from "../controllers/itemsController";
 const router = express.Router();
 
 router.get("/", getItems);
