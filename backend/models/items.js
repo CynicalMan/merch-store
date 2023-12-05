@@ -1,4 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import CategoryData from "../models/Category.js";
+
 const Schema = mongoose.Schema;
 const itemSchema = new Schema({
   title: {
