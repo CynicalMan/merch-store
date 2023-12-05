@@ -9,7 +9,7 @@ export async function loader() {
 
 const ProductList = () => {
     const { products } = useLoaderData();
-
+    console.log(products);
 
     return (
         <>

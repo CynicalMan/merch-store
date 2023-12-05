@@ -1,15 +1,23 @@
 import bgImg from '../../assets/home/bg.jpg'
 import Cart from '../Cart/Cart'
-import { getProducts } from '../../helper/compHelper';
+import { fetchData, getProducts } from '../../helper/compHelper';
 import ProductList from './components/ProductList'
+import {useLoaderData} from "react-router-dom"
 
 export async function loader() {
     const products = await getProducts();
-    console.log(products);
-    return {products};
+    const cartItems = await fetchData("cartItems");
+    console.log(cartItems,products);
+    return {products,cartItems};
 }
 
 const Home = () => {
+
+    const { products } = useLoaderData();
+    console.log(products);
+    const cartItems = useLoaderData();
+    console.log(cartItems);
+
     return (
         <div className="hero">
             <div className="card bg-dark text-white border-0 h-100">

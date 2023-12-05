@@ -14,7 +14,6 @@ export const productSlice = createSlice({
             } else {
                 state.value.push({ ...product, qty: 1 });
             }
-            console.log(state.value);
         },
         delItem: (state,action) => {
             const productId = action.payload;
