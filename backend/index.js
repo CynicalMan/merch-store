@@ -1,10 +1,21 @@
-// getting-started.js
-const mongoose = require('mongoose');
+require('dotenv').config();
+const express = require("express");
+const mongoose = require('mongoose'); 
 
-main().catch(err => console.log(err));
+const app = express();
 
-async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/test');
+const PORT = process.env.PORT || 10000;
 
-  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
-}
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+mongoose.connect(process.env.MONGO_URL,{
+  useNewUrlParser : true,
+  useUnifiedTopology: true
+}).then(()=>{
+  console.log(`server running on port : ${PORT}`);
+}).catch((err)=>{
+  console.log(`${err} didn't connect !`);
+})
