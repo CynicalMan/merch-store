@@ -1,7 +1,8 @@
-const express = require('express')
+const express = require('express');
+const { addItem , getItems, updateItem ,deleteItem } = require('../controllers/itemsController');
 const router = express.Router();
 
-router.get("/", getPromoters);
-router.post("/addPromoter", addPromoter);
-router.put("/updatePromoter/:id", updatePromoter);
-router.delete("/deletePromoter/:id", deletePromoter);
+router.get("/", getItems);
+router.post("/addItem", addItem);
+router.put("/updateItem/:id", updateItem);
+router.delete("/deleteItem/:id", deleteItem);

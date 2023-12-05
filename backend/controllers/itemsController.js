@@ -1,47 +1,44 @@
-const express = require('express')
+import mongoose from "mongoose";
+import ItemData from "../models/items.js";
 
-export const getPromoters = async (req, res) => {
+export const getItems = async (req, res) => {
     try {
-        const Category = await CategoryData.find();
-        res.status(200).json(Category);
+        const Items = await ItemData.find();
+        res.status(200).json(Items);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 };
-export const addPromoter = async (req, res) => {
+export const addItem = async (req, res) => {
     try {
-        const promData = req.body;
-        const Promoter = await PromoterData.create({
-            name: promData.name,
-            percentage: promData.percentage,
-            ppl_visted: promData.ppl_visted,
-            actual_ppl_visted:promData.actual_ppl_visted,
-            profit:promData.profit,
-            netProfit:promData.profit-(promData.percentage*promData.profit),
+        const itemInData = req.body;
+        const ItemDB = await ItemData.create({
+            title: itemInData.title,
+            description: itemInData.description,
+            category: itemInData.category,
+            price:itemInData.price,
         });
         res.status(200).json({
             message: {
                 status : "success",
-                dataCreated: Promoter,
+                dataCreated: ItemDB,
             }
         });
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 };
-export const updatePromoter = async (req, res) => {
+export const updateItem = async (req, res) => {
     try {
-        const promData = req.body;
+        const itemInData = req.body;
         const id = req.params.id;
         const updatedData = {
-            name: promData.name,
-            percentage: promData.percentage,
-            ppl_visted: promData.ppl_visted,
-            actual_ppl_visted:promData.actual_ppl_visted,
-            profit:promData.profit,
-            netProfit:promData.profit-(promData.percentage*promData.profit),
+            title: itemInData.title,
+            description: itemInData.description,
+            category: itemInData.category,
+            price:itemInData.price,
         }
-        const Promoter = await PromoterData.findByIdAndUpdate(id, updatedData);
+        const Item = await ItemData.findByIdAndUpdate(id, updatedData);
         res.status(200).json({
             message: {
                 status : "success",
@@ -53,15 +50,15 @@ export const updatePromoter = async (req, res) => {
     }
 };
 
-export const deletePromoter = async (req, res) => {
+export const deleteItem = async (req, res) => {
     try {
         const id = req.params.id;
         console.log(id);
-        const Promoter = await PromoterData.findByIdAndDelete(id);
+        const Item = await ItemData.findByIdAndDelete(id);
         res.status(200).json({
             message: {
                 status : "success",
-                oldData: Promoter,
+                oldData: Item,
             }
         });
     } catch (error) {
