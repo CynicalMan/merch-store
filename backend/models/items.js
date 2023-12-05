@@ -18,10 +18,11 @@ const itemSchema = new Schema({
     type:Number,
     required:true,
   },
-  media: {
-    type: [String],
-    required: true,
-  },
+  images: [
+    {
+      type: String
+    }
+  ]
 });
 
 const Item = mongoose.model("items", itemSchema);
