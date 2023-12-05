@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
@@ -162,28 +162,47 @@ export const ShowProducts = ({ results }) => {
   );
 };
 
+
 export const ShowCart = ({ cartItems }) => {
+    const deleteProductFromCart = (key, id) => {
+        console.log(id);
+        deleteItem({key , id});
+        dispatch(deleteItem(key , id));
+      };
   console.log(cartItems);
+
   return (
     <>
       <div className="container">
-        {cartItems?cartItems.map((res) => {
+        {
+        cartItems.length>0?
+        <div>
+            {cartItems.map((res) => {
           return (
             <div className="p-2">
               <div className="row rounded-3 d-flex h-50 p-2 border border-2 shadow-sm">
                 <div className="col-4 " >
-                  <img src={res.image} className="w-75 " alt="" />
+                  <img src={res.image} className="w-100 " height="90" alt="" />
                 </div>
                 <div className="col-8  ">
                   <div className="text-truncate">Title: {res.title}</div>
-                  <div>SubTotal: {res.price * cartItems.filter((res)=>{res.id === res} ).length} EGP</div>
-                  <div> <button className="btn btn-primary btn-sm ">Remove</button></div>
+                  <div>SubTotal: {res.price} EGP <span className="ms-4">2x</span></div>
+                  <div> 
+                    <button className="btn btn-primary btn-sm mt-2 "
+                   onClick={()=>deleteProductFromCart('cartItems',res.id)}>Remove</button></div>
                 </div>
               </div>
             </div>
           );
-        }):"Cart is empty"}
+        })
+        }
+        <div className="row">
+        <button className="btn btn-primary w-75 m-auto" >Check out</button>
+        </div>
+        </div>
+      :"Cart is empty"}
       </div>
+
     </>
   );
 };

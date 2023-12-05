@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./Cart.css";
-import { ShowCart, ShowProducts, getProducts } from "../../helper/compHelper";
+import { ShowCart } from "../../helper/compHelper";
 import { useLoaderData } from "react-router-dom";
-import { useSelector } from 'react-redux'
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 const Cart = () => {
   const [openCart, setOpenCart] = useState(false);
 
@@ -21,13 +21,14 @@ const Cart = () => {
       </button>
 
       <div
-        className={`offcanvas offcanvas-start show shadow-lg `}
+        className={`offcanvas offcanvas-start shadow-lg ${openCart?`show`:``} `}
         tabIndex="-1"
         id="offcanvasWithBackdrop"
         aria-labelledby="offcanvasWithBackdropLabel"
       >
         <div className="offcanvas-header">
-          <h5 className="offcanvas-title text-center" id="offcanvasWithBackdropLabel">
+        <FontAwesomeIcon icon={faCartShopping} className="fa-lg" />
+          <h5 className="offcanvas-title text-center " id="offcanvasWithBackdropLabel">
           Cart
         </h5>
           <button
@@ -38,10 +39,9 @@ const Cart = () => {
         </div>
         <div className="offcanvas-body">
           <ShowCart cartItems={cartItems}/>
-        {/* {!cart?<div className="text-center">Cart is empty</div>:<ShowCart result={cart}/>} */}
         </div>
       </div>
-       {openCart && <div className="modal-backdrop fade show" onClick={()=>{setOpenCart(false)}}></div>}
+       {openCart && <div className="modal-backdrop fade " onClick={()=>{setOpenCart(false)}}></div>}
     </>
   );
 };
