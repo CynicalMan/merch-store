@@ -16,12 +16,11 @@ export async function loader() {
   return {products};
 }
 
-
 function App() {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <Outlet /> 
       {/* <Footer /> */}
     </>
