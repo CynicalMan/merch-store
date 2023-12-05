@@ -1,0 +1,13 @@
+.form-control:focus{
+    outline: none ;
+    box-shadow: none;
+    border: auto; 
+    border-color: black;
+}
+
+
+@media (min-width: 1400px){
+.container-checkout {
+    max-width: 1105px;
+}
+}
