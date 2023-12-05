@@ -1,4 +1,5 @@
-const express = require('express')
+import express from "express"
+import { addPromoter, deletePromoter, getPromoters, updatePromoter } from "../controllers/itemsController";
 const router = express.Router();
 
 router.get("/", getPromoters);
