@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import ProductData from "../models/product.js";
 import fs from "fs"
 

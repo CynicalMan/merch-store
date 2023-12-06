@@ -5,11 +5,10 @@ import { verifyJWT } from "../middleware/verifyJWT.js";
 
 const router = express.Router();
 
-router.use(verifyJWT)
 router.get("/", getProducts);
 router.get("/getProduct/:id", getProduct);
-router.post("/addProduct",upload.array("images"), addProduct);
-router.put("/updateProduct/:id",upload.array("images"), updateProduct);
-router.delete("/deleteProduct/:id", deleteProduct);
+router.post("/addProduct", verifyJWT(["admin"]),upload.array("images"), addProduct);
+router.put("/updateProduct/:id", verifyJWT(["admin"]),upload.array("images"), updateProduct);
+router.delete("/deleteProduct/:id", verifyJWT(["admin"]), deleteProduct);
 
 export default router

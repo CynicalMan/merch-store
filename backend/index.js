@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import cookieParser from 'cookie-parser';
 import path from "path";
 import productRoutes from "./routes/product.js"
 import authRoutes from "./routes/user.js"
@@ -12,6 +13,7 @@ const app = express();
 
 const PORT = process.env.PORT || 10000;
 
+app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
