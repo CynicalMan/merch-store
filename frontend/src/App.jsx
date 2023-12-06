@@ -23,7 +23,7 @@ function App() {
       <Navbar />
       <Cart />
       <Outlet /> 
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

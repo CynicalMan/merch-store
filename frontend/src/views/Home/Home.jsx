@@ -12,7 +12,7 @@ const Home = () => {
     return (
         <div className="hero">
             <div className="card bg-dark text-white border-0 h-100">
-                <img src={bgImg} className="card-img h-100vh" alt="background" />
+                <img src={bgImg} className="card-img h-100vh object-fit-cover" alt="background" />
                 <div className="card-img-overlay d-flex flex-column justify-content-center">
                     <div className="container">
                         <h5 className="card-title display-3 fw-bolder mb-0">NEW SEASON ARRIVALS</h5>

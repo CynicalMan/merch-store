@@ -111,17 +111,17 @@ export const ShowProducts = ({ results }) => {
           </div>
           {products.map((res) => {
             return (
-              <div className="col-md-3 g-4 " key={res.id}>
-                <div className="card h-100 text-center p-4 border-2 shadow-sm">
+              <div className="col-xl-3 col-lg-4 col-x col-md-6 g-4 " key={res.id}>
+                <div className="card h-100 text-center p-4  border-2 shadow-sm">
                   <img
                     src={res.image}
-                    className="card-img-top"
+                    className="card-img-top p-sm-5"
                     height={250}
                     alt={res.title}
                   />
                   <div className="card-body">
                     <h5 className="card-title mb-0 text-truncate">{res.title}</h5>
-                    <p className="card-text lead fw-bold">${res.price}</p>
+                    <p className="card-text lead fw-bold">{res.price} EGP</p>
                     <Link
                       to={`products/${res.id}`}
                       className="btn btn-outline-dark"
@@ -157,12 +157,13 @@ export const ShowCart = ({ cartItems }) => {
               <div className="p-2" key={res.id}>
                 <div className="row rounded-3 d-flex h-50 p-2 border border-2 shadow-sm">
                   <div className="col-4 " >
-                    <img src={res.image} className="w-75 " alt="" />
+                    <img src={res.image} className="w-100 " alt="" />
                   </div>
                   <div className="col-8  ">
                     <div className="text-truncate">Title: {res.title}</div>
                     <div>SubTotal: {res.price * res.qty} EGP</div>
-                    <div> <button onClick={() => delProductToCart(res.id)} className="btn btn-primary btn-sm ">Remove</button></div>
+                    <div>Qty: {res.qty} </div>
+                    <div> <button onClick={() => delProductToCart(res.id)} className="btn btn-primary btn-sm mt-1 ">Remove</button></div>
                   </div>
                 </div>
               </div>
@@ -196,7 +197,7 @@ export const ShowProduct = ({ product }) => {
           Rating {product.rating && product.rating.rate}
           <FontAwesomeIcon icon={faStar} />
         </p>
-        <h3 className="display-6 fw-bold my-4">${product.price}</h3>
+        <h3 className="display-6 fw-bold my-4">{product.price} EGP</h3>
         <p className="lead">${product.description}</p>
         <button
           onClick={() => addProductToCart(product)}

@@ -24,13 +24,17 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link to={"/"} className="nav-link active" aria-current="page">Home</Link>
+                            <Link to={"/"} className="nav-link " aria-current="page">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={"/products"} className="nav-link">Products</Link>
+                            <Link to={"/products"} className="nav-link text-decoration-none">
+                                Products
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link">About me</a>
+                        <Link to={"/about"} className="nav-link text-decoration-none">
+                                About
+                            </Link>
                         </li>
 
                     </ul>

@@ -12,6 +12,7 @@ import { store } from './redux/store.js'
 import Signin from './views/Auth/Signin.jsx'
 import Signup  from './views/Auth/Signup.jsx'
 import Checkout from './views/Checkout/Checkout.jsx'
+import About from './views/About/About.jsx'
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ]
   },
