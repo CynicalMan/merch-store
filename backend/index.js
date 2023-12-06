@@ -30,7 +30,3 @@ mongoose.connect(process.env.MONGO_URL,{
 }).catch((err)=>{
   console.log(`${err} didn't connect !`);
 })
-
-app.listen(4000, function () {
-  console.log('Example app listening on port');
- });
