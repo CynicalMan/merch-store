@@ -1,15 +1,7 @@
-import { LoadingProducts, ShowProducts } from "../../../helper/compHelper";
+import { LoadingProducts, ShowProducts } from "../helper/compHelper";
 import { useLoaderData } from "react-router-dom";
-import { getProducts } from "../../../helper/compHelper";
 
-export async function loader() {
-    const products = await getProducts();
-    return {products};
-}
-
-const ProductList = () => {
-    const { products } = useLoaderData();
-    console.log(products);
+const ProductList = ({ products }) => {
 
     return (
         <>

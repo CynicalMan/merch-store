@@ -1,11 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
+const items = localStorage.getItem("cartItems") !== null ? JSON.parse(localStorage.getItem("cartItems")) : []
+const totalQuantity = localStorage.getItem("totalQuantity") !== null ? JSON.parse(localStorage.getItem("totalQuantity")) : 0
+const totalAmount = localStorage.getItem("totalAmount") !== null ? JSON.parse(localStorage.getItem("totalAmount")) : 0
+
 export const productSlice = createSlice({
     name: 'productsState',
     initialState: {
-        value: [],
-        totalQuantity: 0,
-        totalAmount: 0
+        value: items,
+        totalQuantity: totalQuantity,
+        totalAmount: totalAmount
     },
     reducers: {
         addItem: (state,action) => {
@@ -20,6 +25,8 @@ export const productSlice = createSlice({
             state.totalQuantity += 1;
             state.totalAmount += product.price;
             localStorage.setItem("cartItems", JSON.stringify(state.value));
+            localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+            localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
         },
         delItem: (state,action) => {
             const productId = action.payload;
@@ -35,6 +42,8 @@ export const productSlice = createSlice({
             state.totalQuantity -= 1;
             state.totalAmount -= product.price;
             localStorage.setItem("cartItems", JSON.stringify(state.value));
+            localStorage.setItem("totalQuantity", JSON.stringify(state.totalQuantity));
+            localStorage.setItem("totalAmount", JSON.stringify(state.totalAmount));
         },
     }
 })

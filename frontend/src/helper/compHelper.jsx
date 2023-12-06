@@ -83,7 +83,7 @@ export const ShowProducts = ({ results }) => {
 
       return (
         <>
-          <div className="buttons d-flex justify-content-center mb-5 pb-5">
+          <div className="buttons d-flex justify-content-center mb-5">
             <button
               onClick={() => {
                 setProducts(results);
@@ -123,7 +123,7 @@ export const ShowProducts = ({ results }) => {
                     <h5 className="card-title mb-0 text-truncate">{res.title}</h5>
                     <p className="card-text lead fw-bold">{res.price} EGP</p>
                     <Link
-                      to={`products/${res.id}`}
+                      to={`/products/${res.id}`}
                       className="btn btn-outline-dark"
                     >
                       Buy Now

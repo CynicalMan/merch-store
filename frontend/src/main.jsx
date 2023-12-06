@@ -4,8 +4,6 @@ import App , {loader as appLoader} from './App.jsx'
 import './index.css'
 import {createBrowserRouter , RouterProvider} from "react-router-dom"
 import ErrorPage from './views/ErrorPage/ErrorPage.jsx'
-import Home , {loader as homeLoader}  from './views/Home/Home.jsx'
-import ProductList, {loader as productsLoader} from './views/Home/components/ProductList.jsx'
 import Product, {loader as productLoader} from './views/Product/Product.jsx'
 import {Provider} from "react-redux"
 import { store } from './redux/store.js'
@@ -13,6 +11,8 @@ import Signin from './views/Auth/Signin.jsx'
 import Signup  from './views/Auth/Signup.jsx'
 import Checkout from './views/Checkout/Checkout.jsx'
 import About from './views/About/About.jsx'
+import Products ,{ loader as productsLoader } from './views/Products/Products.jsx'
+import Home ,{ loader as homeLoader }from './views/Home/Home.jsx'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <ProductList />,
+        element: <Products />,
         loader: productsLoader
       },
       {
