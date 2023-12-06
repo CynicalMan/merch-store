@@ -1,12 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRightToBracket,faUserPlus,faCartShopping } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRightToBracket, faUserPlus, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { openCartBar } from '../redux/cart/cartSlice'
 
 const Navbar = () => {
 
-    const product = useSelector((state) => state.value)
-    console.log(product)
+    const products = useSelector((state) => state.products)
+    const dispatch = useDispatch();
+    const handleCartBar = () => {
+        dispatch(openCartBar(true));
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm" >
             <div className="container">
@@ -30,7 +35,7 @@ const Navbar = () => {
                     <div className="buttons">
                         <Link to={"/signup"} className="btn btn-outline-dark "><FontAwesomeIcon icon={faUserPlus} className='me-1' />Register</Link>
                         <Link to={"/signin"} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faArrowRightToBracket} className='me-2' />Login</Link>
-                        <button onClick={onCartButtonClick} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faCartShopping} className='me-1'  />Cart ({product.length})</button>
+                        <button onClick={handleCartBar} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faCartShopping} className='me-1' />Cart ({products.totalQuantity})</button>
                     </div>
                 </div>
             </div>

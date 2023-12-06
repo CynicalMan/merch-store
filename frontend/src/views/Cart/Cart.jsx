@@ -2,46 +2,45 @@ import { useState } from "react";
 import "./Cart.css";
 import { ShowCart } from "../../helper/compHelper";
 import { useLoaderData } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-const Cart = () => {
-  const [openCart, setOpenCart] = useState(false);
+import { useDispatch, useSelector } from 'react-redux'
+import { openCartBar } from "../../redux/cart/cartSlice";
 
-  const { cartItems } = useLoaderData();
-  console.log(cartItems);
+const Cart = () => {
+
+
+  const dispatch = useDispatch();
+  const { value, totalQuantity, totalAmount } = useSelector((state) => state.products)
+  const cart = useSelector((state) => state.cartState.value)
+  console.log(cart);
+
+  const { products } = useLoaderData();
+  console.log(products);
 
   return (
     <>
-      <button
-        className="btn btn-primary"
-        type="button"
-        onClick={()=>{setOpenCart(true)}}
-      >
-        toggle
-      </button>
 
       <div
-        className={`offcanvas offcanvas-start shadow-lg ${openCart?`show`:``} `}
+        className={`offcanvas offcanvas-start ${cart ? `show` : ``} shadow-lg `}
         tabIndex="-1"
         id="offcanvasWithBackdrop"
         aria-labelledby="offcanvasWithBackdropLabel"
       >
         <div className="offcanvas-header">
-        <FontAwesomeIcon icon={faCartShopping} className="fa-lg" />
-          <h5 className="offcanvas-title text-center " id="offcanvasWithBackdropLabel">
-          Cart
-        </h5>
+          <h5 className="offcanvas-title text-center" id="offcanvasWithBackdropLabel">
+            Cart
+          </h5>
           <button
             type="button"
             className="btn-close text-reset"
-            onClick={()=>{setOpenCart(false)}}
+            onClick={() => { dispatch(openCartBar(false)) }}
           ></button>
         </div>
         <div className="offcanvas-body">
-          <ShowCart cartItems={cartItems}/>
+          <ShowCart cartItems={value} />
+          {/* {!cart?<div className="text-center">Cart is empty</div>:<ShowCart result={cart}/>} */}
         </div>
       </div>
-       {openCart && <div className="modal-backdrop fade " onClick={()=>{setOpenCart(false)}}></div>}
+      {cart && <div className="modal-backdrop fade show" onClick={() => { dispatch(openCartBar(false)) }}></div>}
     </>
   );
 };

@@ -4,7 +4,6 @@ import { LoadingProduct, ShowProduct, getProduct } from "../../helper/compHelper
 
 export async function loader({params}) {
     const product = await getProduct({params});
-    console.log(product);
     return {product};
 }
 

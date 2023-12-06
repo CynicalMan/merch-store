@@ -1,22 +1,13 @@
 import bgImg from '../../assets/home/bg.jpg'
-import Cart from '../Cart/Cart'
-import { fetchData, getProducts } from '../../helper/compHelper';
+import { getProducts } from '../../helper/compHelper';
 import ProductList from './components/ProductList'
-import {useLoaderData} from "react-router-dom"
 
 export async function loader() {
     const products = await getProducts();
-    const cartItems = await fetchData("cartItems");
-    console.log(cartItems,products);
-    return {products,cartItems};
+    return { products };
 }
 
 const Home = () => {
-
-    const { products } = useLoaderData();
-    console.log(products);
-    const cartItems = useLoaderData();
-    console.log(cartItems);
 
     return (
         <div className="hero">
@@ -24,13 +15,12 @@ const Home = () => {
                 <img src={bgImg} className="card-img h-100vh" alt="background" />
                 <div className="card-img-overlay d-flex flex-column justify-content-center">
                     <div className="container">
-                    <h5 className="card-title display-3 fw-bolder mb-0">NEW SEASON ARRIVALS</h5>
-                    <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
+                        <h5 className="card-title display-3 fw-bolder mb-0">NEW SEASON ARRIVALS</h5>
+                        <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
                     </div>
                 </div>
             </div>
             <ProductList />
-            <Cart/>
         </div>
     )
 }
