@@ -1,12 +1,12 @@
 import express from "express";
-import { addItem, deleteItem, getItems, updateItem } from "../controllers/itemsController.js";
+import { addItem, deleteItem, getItems, updateItem , getItem } from "../controllers/itemController.js";
 import { verifyJWT } from "../middleware/verifyJWT.js";
-import upload from "../middleware/upload.js";
 const router = express.Router();
 
 router.use(verifyJWT)
 router.get("/", getItems);
-router.post("/addItem",upload.array("images"), addItem);
+router.get("/item/:id", getItem);
+router.post("/addItem", addItem);
 router.put("/updateItem/:id", updateItem);
 router.delete("/deleteItem/:id", deleteItem);
 

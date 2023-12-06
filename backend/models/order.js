@@ -1,24 +1,19 @@
 import mongoose from "mongoose";
-
+import orderDetailsModel from "./orderDetails.js";
 const Schema = mongoose.Schema;
 const orderSchema = new Schema({
-  description: {
-    type: String,
-    required: true,
+  userID: {
+    type : mongoose.Schema.Types.ObjectId , 
+    ref : 'user' 
   },
-  category: {
-    type: String,
-    required: true,
+  orderDate: {
+    type: Date,
+    default: Date.now,
   },
-  price:{
-    type:Number,
-    required:true,
-  },
-  media: {
-    type: [String],
-    required: true,
-  },
+  totalAmount: Number,
+  status: String,
+  orderDetails: [{ type: mongoose.Schema.Types.ObjectId, ref: 'orderDetails' }], 
 });
 
-const Item = mongoose.model("items", itemSchema);
-export default Item
+const OrderModel = mongoose.model("order", orderSchema);
+export default OrderModel

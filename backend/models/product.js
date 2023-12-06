@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-const itemSchema = new Schema({
+const productSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -18,6 +18,7 @@ const itemSchema = new Schema({
     type:Number,
     required:true,
   },
+  availableQuantity: Number,
   images: [
     {
       type: String
@@ -25,5 +26,5 @@ const itemSchema = new Schema({
   ]
 });
 
-const Item = mongoose.model("items", itemSchema);
-export default Item
+const ProductModel = mongoose.model("product", productSchema);
+export default ProductModel
