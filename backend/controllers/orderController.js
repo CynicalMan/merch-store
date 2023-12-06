@@ -5,8 +5,7 @@ import ProductModel from "../models/product.js";
 import UserModel from "../models/user.js";
 export const getOrders = async (req, res) => {
   try {
-    const Orders = await OrderData.find();
-    console.log(Orders);
+    const Orders = await OrderModel.find();
     res.status(200).json(Orders);
   } catch (error) {
     console.log(error);
@@ -16,7 +15,7 @@ export const getOrders = async (req, res) => {
 export const getOrder = async (req, res) => {
   try {
     const OrderID = req.params.id;
-    const Order = await OrderData.findById(OrderID);
+    const Order = await OrderMode.findById(OrderID);
     if (Order) {
       res.status(200).json(Order);
     } else res.status(404).json({ message: "Not Found" });
@@ -70,40 +69,42 @@ export const addOrder = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-// export const updateOrder = async (req, res) => {
-//     try {
-//         const ItemsInData = req.body;
-//         const id = req.params.id;
-//         const items = OrderInData.itemID;
-//         items.forEach(element => {
-//             ItemData.findById(element);
-//             console.log(items);
-//         });
-//         const updatedData = {
-//                 userID: OrderInData.userID,
-//                 itemID: OrderInData.itemID,
-//                 notes: OrderInData.notes,
-//                 totalAmount: 0 ,
-//         }
-//         const Order = await OrderData.findByIdAndUpdate(id, updatedData);
-//         res.status(200).json({
-//             message: {
-//                 status: "success",
-//                 oldData: updatedData,
-//             }
-//         });
-//     } catch (error) {
-//         res.status(404).json({ message: error.message });
-//     }
-// };
-// Assuming you have your necessary imports for Express and your models
-// ...
 
+export const updateOrder = async (req, res) => {
+    try {
+      const orderId = req.params.id;
+  
+      // Check if the orderId is valid
+      if (!mongoose.Types.ObjectId.isValid(orderId)) {
+        return res.status(400).json({ error: "Invalid order ID" });
+      }
+  
+      // Check if the order exists
+      const existingOrder = await OrderModel.findById(orderId);
+      if (!existingOrder) {
+        return res.status(404).json({ error: "Order not found" });
+      }
+  
+      // Assuming you want to update the order status
+      const { newStatus } = req.body;
+  
+      // Update the order status
+      existingOrder.status = newStatus || existingOrder.status; // Update only if newStatus is provided
+  
+      // Save the updated order
+      const updatedOrder = await existingOrder.save();
+  
+      res.json({ message: 'Order updated successfully', order: updatedOrder });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  
 // Delete Order API
 export const deleteOrder = async (req, res) => {
     try {
       const  orderId  = req.params.id;
-        console.log(orderId);
       // Check if the orderId is valid
       if (!mongoose.Types.ObjectId.isValid(orderId)) {
         return res.status(400).json({ error: "Invalid order ID" });

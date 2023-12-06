@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import path from "path";
 import productRoutes from "./routes/product.js"
 import authRoutes from "./routes/user.js"
-import itemRoutes from "./routes/item.js"
 import orderRoutes from "./routes/order.js"
 dotenv.config()
 
@@ -21,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use("/product", productRoutes)
 app.use("/auth",authRoutes)
-app.use("/item",itemRoutes)
 app.use("/order",orderRoutes)
 
 

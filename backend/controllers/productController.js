@@ -5,7 +5,6 @@ import fs from "fs"
 export const getProducts = async (req, res) => {
     try {
         const Products = await ProductData.find();
-        console.log(Products);
         res.status(200).json(Products);
     } catch (error) {
         console.log(error);
@@ -46,7 +45,6 @@ export const addProduct = async (req, res) => {
             price: productInData.price,
             images: imageNames
         });
-        console.log(productDB);
         res.status(200).json({
             message: {
                 status: "success",
@@ -57,27 +55,55 @@ export const addProduct = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+
 export const updateProduct = async (req, res) => {
     try {
-        const productInData = req.body;
-        const id = req.params.id;
-        const updatedData = {
-            title: productInData.title,
-            description: productInData.description,
-            category: productInData.category,
-            price: productInData.price,
+        const productId = req.params.id;
+
+        // Check if the product exists
+        const existingProduct = await ProductData.findById(productId);
+        if (!existingProduct) {
+            return res.status(404).json({ error: "Product not found" });
         }
-        const Product = await ProductData.findByIdAndUpdate(id, updatedData);
-        res.status(200).json({
-            message: {
-                status: "success",
-                oldData: updatedData,
+
+        // Update product details
+        const updatedProductData = {
+            title: req.body.title || existingProduct.title,
+            description: req.body.description || existingProduct.description,
+            category: req.body.category || existingProduct.category,
+            price: req.body.price || existingProduct.price,
+        };
+
+        // If you want to update images, handle it here
+        if (req.files && req.files.length > 0) {
+            const newImages = req.files.map((image) => image.filename);
+            updatedProductData.images = newImages;
+            
+            // Delete old images from the server (if needed)
+            for (const oldImage of existingProduct.images) {
+                // Delete logic (adjust this based on your server setup)
+                fs.unlinkSync("./upload/" + oldImage); 
             }
+        }
+
+        // Update the product in the database
+        const updatedProduct = await ProductData.findByIdAndUpdate(
+            productId,
+            updatedProductData,
+            { new: true } // Return the updated document
+        );
+
+        res.status(200).json({
+            status: "success",
+            dataUpdated: updatedProduct,
         });
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+
 export const deleteProduct = async (req, res) => {
     try {
         const id = req.params.id;
