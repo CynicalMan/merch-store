@@ -21,8 +21,9 @@ function App() {
   return (
     <>
       <Navbar />
+      <Cart />
       <Outlet /> 
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

@@ -7,6 +7,8 @@ import { openCartBar } from '../redux/cart/cartSlice'
 const Navbar = () => {
 
     const products = useSelector((state) => state.products)
+    const cart = useSelector((state) => state.cartState.value)
+    console.log(cart);
     const dispatch = useDispatch();
     const handleCartBar = () => {
         dispatch(openCartBar(true));
