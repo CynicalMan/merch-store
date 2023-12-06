@@ -144,13 +144,14 @@ export const ShowCart = ({ cartItems }) => {
 
   const delProductToCart = (prodId) => {
     console.log(prodId);
-    dispatch(delItem(prodId));
+    dispatch(delItem(prodId));``
   };
-
+  console.log(cartItems);
   return (
     <>
       <div className="container">
-        {cartItems ? cartItems.map((res) => {
+        {products?
+         products.map((res) => {
           return (
             <>
               <div className="p-2" key={res.id}>
@@ -160,7 +161,7 @@ export const ShowCart = ({ cartItems }) => {
                   </div>
                   <div className="col-8  ">
                     <div className="text-truncate">Title: {res.title}</div>
-                    <div>SubTotal: {res.price * cartItems.filter((res) => { res.id === res }).length} EGP</div>
+                    <div>SubTotal: {res.price * res.qty} EGP</div>
                     <div> <button onClick={() => delProductToCart(res.id)} className="btn btn-primary btn-sm ">Remove</button></div>
                   </div>
                 </div>

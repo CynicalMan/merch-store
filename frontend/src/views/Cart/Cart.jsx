@@ -11,10 +11,8 @@ const Cart = () => {
   const dispatch = useDispatch();
   const { value, totalQuantity, totalAmount } = useSelector((state) => state.products)
   const cart = useSelector((state) => state.cartState.value)
-  console.log(cart);
+  console.log(value);
 
-  const { products } = useLoaderData();
-  console.log(products);
 
   return (
     <>
@@ -36,8 +34,7 @@ const Cart = () => {
           ></button>
         </div>
         <div className="offcanvas-body">
-          <ShowCart cartItems={value} />
-          {/* {!cart?<div className="text-center">Cart is empty</div>:<ShowCart result={cart}/>} */}
+          <ShowCart result={value}/>
         </div>
       </div>
       {cart && <div className="modal-backdrop fade show" onClick={() => { dispatch(openCartBar(false)) }}></div>}
