@@ -20,7 +20,7 @@ const Cart = () => {
     <>
 
       <div
-        className={`offcanvas offcanvas-start ${cart ? `show` : `show`} shadow-lg `}
+        className={`offcanvas offcanvas-start ${cart ? `show` : ``} shadow-lg `}
         tabIndex="-1"
         id="offcanvasWithBackdrop"
         aria-labelledby="offcanvasWithBackdropLabel"
