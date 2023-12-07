@@ -178,7 +178,7 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
         }) : "Cart is empty"}
         <div className="">
         <div className="row p-3 bg-info border bg-dark-subtle rounded-top-4 text-dark " >
-          <div className="total d-flex fw-bolder  justify-content-between">
+          <div className="d-flex fw-bolder  justify-content-between">
             <div className="text-muted">Total Amount  </div>
             <div>{RoundingNumber(totalAmount)} EGP</div>
             </div>
