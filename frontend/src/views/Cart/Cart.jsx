@@ -35,8 +35,8 @@ const Cart = () => {
             onClick={() => { dispatch(openCartBar(false)) }}
           ></button>
         </div>
-        <div className="offcanvas-body">
-          <ShowCart result={value}/>
+        <div className="offcanvas-body ">
+          <ShowCart result={value} totalQuantity={totalQuantity} totalAmount={totalAmount}/>
         </div>
       </div>
       {cart && <div className="modal-backdrop fade show" onClick={() => { dispatch(openCartBar(false)) }}></div>}

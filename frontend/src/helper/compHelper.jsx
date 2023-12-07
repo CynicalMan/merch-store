@@ -4,9 +4,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, delItem } from "../redux/product/productSlice";
+import Cart from "../views/Cart/Cart";
 
 export const LoadingProducts = () => {
   return (
@@ -136,11 +136,13 @@ export const ShowProducts = ({ results }) => {
         </>
       );
 };
+export const RoundingNumber = (number)=>{
+  return Math.round((number + Number.EPSILON) * 100) / 100;
+};
 
-export const ShowCart = ({ cartItems }) => {
+export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.value)
-
   const delProductToCart = (prodId) => {
     dispatch(delItem(prodId));
   };
@@ -151,22 +153,39 @@ export const ShowCart = ({ cartItems }) => {
         products.map((res) => {
           return (
             <>
-              <div className="p-2" key={res.id}>
+              <div className="ms-2 p-2" key={res.id}>
                 <div className="row rounded-3 d-flex h-50 p-2 border border-2 shadow-sm">
                   <div className="col-4 " >
                     <img src={res.image} className="w-100 " alt="" />
                   </div>
                   <div className="col-8  ">
                     <div className="text-truncate">Title: {res.title}</div>
-                    <div>SubTotal: {res.price * res.qty} EGP</div>
-                    <div>Qty: {res.qty} </div>
-                    <div> <button onClick={() => delProductToCart(res.id)} className="btn btn-dark btn-sm mt-1 ">Remove</button></div>
+                    <div>SubTotal: {RoundingNumber(res.price * res.qty)} EGP</div>
+                    <div className="d-flex justify-content-between pt-1">
+                      <div className="col-3 w-50 mt-2">Qty: {res.qty} </div>
+                      <div className="col-8 w-50"> <button onClick={() => delProductToCart(res.id)} className="btn btn-dark btn-sm mt-1 ">Remove</button></div>
+                  </div>
                   </div>
                 </div>
               </div>
             </>
           );
         }) : "Cart is empty"}
+        <div className="">
+        <div className="row p-3 bg-info border bg-dark-subtle rounded-top-4 text-dark " >
+          <div className="d-flex fw-bolder  justify-content-between">
+            <div className="text-muted">Total Amount  </div>
+            <div>{RoundingNumber(totalAmount)} EGP</div>
+            </div>
+        </div>
+        <div className="row">
+          <button className="btn btn-dark rounded-bottom-4 ">
+          <Link to="/Checkout" className="text-decoration-none text-light">
+          Checkout
+          </Link>
+          </button>
+        </div>
+        </div>
       </div>
     </>
   );
