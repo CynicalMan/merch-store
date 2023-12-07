@@ -1,13 +1,17 @@
 import bgImg from '../../assets/home/bg.jpg'
 import { getProducts } from '../../helper/compHelper';
-import ProductList from './components/ProductList'
+import ProductList from '../../components/ProductList'
+import { useLoaderData } from 'react-router-dom';
 
 export async function loader() {
     const products = await getProducts();
+    console.log(products);
     return { products };
 }
 
 const Home = () => {
+
+    const {products} = useLoaderData()
 
     return (
         <div className="hero">
@@ -20,7 +24,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <ProductList />
+            <ProductList products={products} />
         </div>
     )
 }
