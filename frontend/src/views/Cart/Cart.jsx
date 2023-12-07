@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Cart.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { ShowCart } from "../../helper/compHelper";
 import { useLoaderData } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,8 +25,9 @@ const Cart = () => {
         id="offcanvasWithBackdrop"
         aria-labelledby="offcanvasWithBackdropLabel"
       >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title text-center" id="offcanvasWithBackdropLabel">
+        <div className="offcanvas-header border-bottom">
+        <FontAwesomeIcon icon={faCartShopping}  className="fa-lg"/>
+          <h5 className="offcanvas-title" id="offcanvasWithBackdropLabel">
             Cart
           </h5>
           <button

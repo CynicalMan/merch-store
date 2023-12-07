@@ -74,6 +74,12 @@ export const Login= async(req , res)=>
                 role:foundUser.role
             }
         },process.env.ACCESS_TOKEN_SECRET);
+        res.cookie("jwt", accessToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: 1000 * 60 * 15, // Set the max age to match the access token expiration
+        });
         res.json({accessToken,email:foundUser.email ,
         name:foundUser.name });
 
