@@ -219,7 +219,7 @@ export const ShowProduct = ({ product }) => {
           <FontAwesomeIcon icon={faStar} />
         </p>
         <h3 className="display-6 fw-bold my-4">{product.price} EGP</h3>
-        <p className="lead">${product.description}</p>
+        <p className="lead">{product.description}</p>
         <button
           onClick={() => addProductToCart(product)}
           className="btn btn-outline-dark px-4 py-2"
