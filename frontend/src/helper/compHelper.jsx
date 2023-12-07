@@ -163,7 +163,7 @@ export const ShowCart = ({ cartItems }) => {
                     <div className="text-truncate">Title: {res.title}</div>
                     <div>SubTotal: {res.price * res.qty} EGP</div>
                     <div>Qty: {res.qty} </div>
-                    <div> <button onClick={() => delProductToCart(res.id)} className="btn btn-primary btn-sm mt-1 ">Remove</button></div>
+                    <div> <button onClick={() => delProductToCart(res.id)} className="btn btn-dark btn-sm mt-1 ">Remove</button></div>
                   </div>
                 </div>
               </div>
