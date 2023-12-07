@@ -17,6 +17,7 @@ export async function signinAction({ request }) {
         password: values.password
       })
       console.log(resp);
+      return resp
     }
     catch (e) {
       throw new Error("There was a problem in sign up " + e);
