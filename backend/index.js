@@ -3,10 +3,12 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cookieParser from 'cookie-parser';
-import path from "path";
 import productRoutes from "./routes/product.js"
 import authRoutes from "./routes/user.js"
 import orderRoutes from "./routes/order.js"
+import cors from "cors";
+import helmet from "helmet";
+
 dotenv.config()
 
 const app = express();
@@ -18,7 +20,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json())
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(cors());
 
 app.use("/product", productRoutes)
 app.use("/auth",authRoutes)
