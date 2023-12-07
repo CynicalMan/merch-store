@@ -7,8 +7,8 @@ import ErrorPage from './views/ErrorPage/ErrorPage.jsx'
 import Product, {loader as productLoader} from './views/Product/Product.jsx'
 import {Provider} from "react-redux"
 import { store } from './redux/store.js'
-import Signin from './views/Auth/Signin.jsx'
-import Signup  from './views/Auth/Signup.jsx'
+import Signin, { signinAction } from './views/Auth/Signin.jsx'
+import Signup, { signupAction }  from './views/Auth/Signup.jsx'
 import Checkout from './views/Checkout/Checkout.jsx'
 import About from './views/About/About.jsx'
 import Products ,{ loader as productsLoader } from './views/Products/Products.jsx'
@@ -38,11 +38,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/signin",
-        element: <Signin />
+        element: <Signin />,
+        action: signinAction
       },
       {
         path: "/signup",
-        element: <Signup />
+        element: <Signup />,
+        action: signupAction,
       },
       {
         path: "/about",

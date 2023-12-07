@@ -14,11 +14,11 @@ export async function signupAction({ request }) {
     
   if (_action === "signupAction") {
       try {
-        Signup({
+        const resp = Signup({
           email: values.email,
           password: values.password,
-
         })
+        console.log(resp);
       } catch (e) {
           throw new Error("There was a problem in sign up" + e);
       }

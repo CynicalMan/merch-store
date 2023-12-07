@@ -140,18 +140,15 @@ export const ShowProducts = ({ results }) => {
 export const ShowCart = ({ cartItems }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.value)
-  console.log(products);
 
   const delProductToCart = (prodId) => {
-    console.log(prodId);
-    dispatch(delItem(prodId));``
+    dispatch(delItem(prodId));
   };
-  console.log(cartItems);
   return (
     <>
       <div className="container">
         {products?
-         products.map((res) => {
+        products.map((res) => {
           return (
             <>
               <div className="p-2" key={res.id}>
@@ -178,10 +175,8 @@ export const ShowCart = ({ cartItems }) => {
 export const ShowProduct = ({ product }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.value)
-  console.log(products);
 
   const addProductToCart = (product) => {
-    console.log(product);
     dispatch(addItem(product));
   };
 

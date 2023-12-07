@@ -4,17 +4,21 @@ export const SignupPost = ({
     email , password
 })=>{
     const userData = {
-        userMail: email,
-        userPassword: password
+        email: email,
+        password: password
     }
-    const response = axios.post('https://jsonplaceholder.typicode.com/users', userData);
+    const response = axios.post('http://localhost:4000/auth/register', userData);
+    return response
 };
 
 export const Auth = ({email , password}) =>{
-    const userData ={
-        userMail : email,
-        userPassword : password
+    const userData = {
+        email : email,
+        password : password
     }
-    const response = axios.post("localhost",userData);
+    console.log(userData);
+    const response = axios.post("http://localhost:4000/auth/login",userData);
+    console.log(response);
+    return response
 }
 
