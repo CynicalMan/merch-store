@@ -83,6 +83,7 @@ const Signin = () => {
                       isSubmitting ? <span>Logging in...</span> : (<><span>Log in</span></>)
                     }
                   </button>
+                  <p className="text-muted">Doesn't have an account ? <Link to = {"/signup"} className= "link-offset-2 link-underline link-underline-opacity-0">Sign up.</Link></p>
                 </fetcher.Form>
               </div>
             </div>
