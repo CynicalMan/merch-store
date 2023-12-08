@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser , faLock } from "@fortawesome/free-solid-svg-icons";
 import Bgimg from "../../assets/Sign/470x800.png"
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useRef  } from "react";
 import {useFetcher} from "react-router-dom";
 import { Link } from "react-router-dom";
+import { SignupPost } from "../../helper/helper";
 
 
 export async function signupAction({ request }) {
@@ -14,9 +15,12 @@ export async function signupAction({ request }) {
     
   if (_action === "signupAction") {
       try {
-        const resp = Signup({
+        const resp = SignupPost({
           email: values.email,
           password: values.password,
+          name: values.name,
+          phone: values.phone,
+          address: values.address,
         })
         console.log(resp);
         return resp
@@ -29,6 +33,18 @@ export async function signupAction({ request }) {
 
 const Signup = () => {
   
+  const fetcher = useFetcher()
+  const isSubmitting = fetcher.state === "submitting"
+
+  const formRef = useRef()
+  const focusRef = useRef()
+
+  useEffect(() => {
+    if (!isSubmitting) {
+      formRef.current.reset()
+      focusRef.current.focus()
+    }
+  }, [isSubmitting]);
   
   return (
     <div className="h-100vh w-75 m-auto mt-5">
@@ -37,7 +53,11 @@ const Signup = () => {
           <main className="form-signin d-flex justify-content-center align-items-around p-0 bg-white w-100 rounded-1">
             <div className="col-md-6 text-bg-light d-flex justify-content-center align-items-center bg-white">
               <div className="d-flex justify-content-center align-items-center bg-white">
-                <form method="post"  className="p-4" >
+              <fetcher.Form
+                  method="post"
+                  className="grid-sm"
+                  ref={formRef}
+                >
                   {/* Action  */}
                   <h1 className="py-3">Sign up</h1>
                   <div className="form-floating mb-3">
@@ -48,6 +68,7 @@ const Signup = () => {
                       name= "email"
                       required
                       placeholder="Email"
+                      ref={focusRef}
                     />  
                   </div>
                   <div className="form-floating mb-3">
@@ -88,11 +109,10 @@ const Signup = () => {
                     />
                   </div>
                   <input type="hidden" name="_action" value="signupAction"  />
-                  <button
-                    type="submit"
-                    className="w-75 btn btn-sm btn-dark mt-5 py-2 mx-auto"
-                  >
-                    Sign up
+                  <button type="submit" className="btn btn-outline-dark" disabled={isSubmitting}>
+                    {
+                      isSubmitting ? <span>Signing up...</span> : (<><span>Sign up</span></>)
+                    }
                   </button>
                   <p className="text-muted">
                     Have an account?{" "}
@@ -102,7 +122,7 @@ const Signup = () => {
                       Sign in.
                     </Link>
                   </p>
-                </form>
+                </fetcher.Form>
               </div>
             </div>
             <div className="col-md-6 h-100 overflow-hidden">
