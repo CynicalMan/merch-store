@@ -1,0 +1,32 @@
+#image {
+    margin-top: 30px;
+    margin-left: 5px;
+    opacity: 100;
+}
+
+/* to center the div*/
+
+
+.content-omar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.margin-width{
+    margin: auto;
+    width: 90%;
+}
+.colgap{
+    column-gap: 35%;
+}
+.colgap2{
+    column-gap: 27%;
+}
+.paddinX{
+    padding-left: 10%;
+}
+.paddinY{
+    padding-bottom: 10%;
+}

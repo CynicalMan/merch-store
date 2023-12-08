@@ -15,8 +15,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { useEffect, useRef } from "react";
+import { addProduct } from "../helper/helper";
 import React from "react";
-
+import { useFetcher } from "react-router-dom";
+import "./UserProfile.css";
 // reactstrap components
 import {
   Button,
@@ -31,120 +34,103 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+export async function addProductAction({ request }) {
+  const data = await request.formData();
+  const { _action, ...values } = Object.fromEntries(data);
+  console.log(request);
+  if (_action === "addProductAction") {
+    try {
+      console.log(values);
+      const resp = addProduct({
+        title: values.title,
+        description: values.description,
+        category: values.category,
+        price: values.price,
+        image: values.image,
+      });
+      console.log(resp);
+      return resp;
+    } catch (e) {
+      throw new Error("There was a problem in adding the product " + e);
+    }
+  }
+}
 function UserProfile() {
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
+
+  const formRef = useRef();
+  const focusRef = useRef();
+
+  useEffect(() => {
+    if (!isSubmitting) {
+      formRef.current.reset();
+      focusRef.current.focus();
+    }
+  }, [isSubmitting]);
+
   return (
     <>
-      <div className="content">
+      <div className="content margin-width">
         <Row>
-          <Col md="8">
-            <Card>
+          <Col md="12 ">
+            <Card className="">
               <CardHeader>
-                <h5 className="title">Edit Profile</h5>
+                <h5 className="title text-center">Add Product</h5>
               </CardHeader>
-              <CardBody>
-                <Form>
-                  <Row>
-                    <Col className="pr-md-1" md="5">
-                      <FormGroup>
-                        <label>Company (disabled)</label>
-                        <Input
-                          defaultValue="Creative Code Inc."
-                          disabled
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
+              <CardBody className="">
+                <fetcher.Form method="post" className="grid-sm" ref={formRef}>
+                  {" "}
+                  <Row className="colgap paddinX">
                     <Col className="px-md-1" md="3">
                       <FormGroup>
-                        <label>Username</label>
+                        <label> Title</label>
                         <Input
-                          defaultValue="michael23"
-                          placeholder="Username"
+                          defaultValue=""
+                          placeholder="Title-1"
                           type="text"
+                          name="title"
+                          ref={focusRef}
                         />
                       </FormGroup>
                     </Col>
                     <Col className="pl-md-1" md="4">
                       <FormGroup>
-                        <label htmlFor="exampleInputEmail1">
-                          Email address
-                        </label>
-                        <Input placeholder="mike@email.com" type="email" />
+                        <label htmlFor="exampleInputEmail1">Category</label>
+                        <Input placeholder="Men's collection"  name="category" type="text" />
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col className="pr-md-1" md="6">
+                  <Row className="colgap2 paddinX">
+                    <Col className="pl-md-1" md="4">
                       <FormGroup>
-                        <label>First Name</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="6">
-                      <FormGroup>
-                        <label>Last Name</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md="12">
-                      <FormGroup>
-                        <label>Address</label>
-                        <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="pr-md-1" md="4">
-                      <FormGroup>
-                        <label>City</label>
-                        <Input
-                          defaultValue="Mike"
-                          placeholder="City"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="px-md-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="Andrew"
-                          placeholder="Country"
-                          type="text"
-                        />
+                        <label>Price</label>
+                        <Input placeholder="200 EGP" 
+                         name="price"
+                         type="number" />
                       </FormGroup>
                     </Col>
                     <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
+                      <FormGroup className="paddinY">
+                        <label>Image</label>
+                        <Input
+                          className="w-5"
+                          accept="image/png, image/jpeg"
+                          id="image"
+                          name="image"
+                          type="file"
+                        />
                       </FormGroup>
                     </Col>
                   </Row>
-                  <Row>
+                  <Row className="paddinX">
                     <Col md="8">
                       <FormGroup>
-                        <label>About Me</label>
+                        <label>Description</label>
                         <Input
+                          name="description"
                           cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
+                          defaultValue=""
                           placeholder="Here can be your description"
                           rows="4"
                           type="textarea"
@@ -152,53 +138,16 @@ function UserProfile() {
                       </FormGroup>
                     </Col>
                   </Row>
-                </Form>
+                  <input type="hidden" name="_action" value="addProductAction" />
+                  <CardFooter className="text-center">
+                    <Button className="btn-fill" color="primary" type="submit">
+                    {
+                      isSubmitting ? <span>Saving...</span> : (<><span>Save</span></>)
+                    }
+                    </Button>
+                  </CardFooter>
+                </fetcher.Form>
               </CardBody>
-              <CardFooter>
-                <Button className="btn-fill" color="primary" type="submit">
-                  Save
-                </Button>
-              </CardFooter>
-            </Card>
-          </Col>
-          <Col md="4">
-            <Card className="card-user">
-              <CardBody>
-                <CardText />
-                <div className="author">
-                  <div className="block block-one" />
-                  <div className="block block-two" />
-                  <div className="block block-three" />
-                  <div className="block block-four" />
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <img
-                      alt="..."
-                      className="avatar"
-                      src={require("assets/img/emilyz.jpg")}
-                    />
-                    <h5 className="title">Mike Andrew</h5>
-                  </a>
-                  <p className="description">Ceo/Co-Founder</p>
-                </div>
-                <div className="card-description">
-                  Do not be scared of the truth because we need to restart the
-                  human foundation in truth And I love you like Kanye loves
-                  Kanye I love Rick Owens’ bed design but the back is...
-                </div>
-              </CardBody>
-              <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
-                  </Button>
-                </div>
-              </CardFooter>
             </Card>
           </Col>
         </Row>

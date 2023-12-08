@@ -16,21 +16,22 @@
 
 */
 import TableList from "views/TableList.js";
+import { addProductAction } from "views/UserProfile";
 import UserProfile from "views/UserProfile.js";
 
 var routes = [
   {
     path: "/user-profile",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
+    name: "Adding Product",
+    rtlName: "اضافه منتج",
     icon: "tim-icons icon-single-02",
     component: <UserProfile />,
     layout: "/admin",
   },
   {
     path: "/tables",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
+    name: "Users / Orders",
+    rtlName: "قائمة الطلبات و المستخدمين",
     icon: "tim-icons icon-puzzle-10",
     component: <TableList />,
     layout: "/admin",
