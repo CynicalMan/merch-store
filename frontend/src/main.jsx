@@ -13,7 +13,6 @@ import Checkout from './views/Checkout/Checkout.jsx'
 import About from './views/About/About.jsx'
 import Products ,{ loader as productsLoader } from './views/Products/Products.jsx'
 import Home ,{ loader as homeLoader }from './views/Home/Home.jsx'
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
-        loader: productsLoader
+        loader: productsLoader,
       },
       {
         path: "/products/:id",

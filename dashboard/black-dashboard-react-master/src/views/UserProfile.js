@@ -41,12 +41,13 @@ export async function addProductAction({ request }) {
   if (_action === "addProductAction") {
     try {
       console.log(values);
+      console.log(data.getAll("image"));
       const resp = addProduct({
         title: values.title,
         description: values.description,
         category: values.category,
         price: values.price,
-        images: data.getAll("images"),
+        images: data.getAll("image"),
       });
       console.log(resp);
       return resp;
