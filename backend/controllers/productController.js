@@ -1,6 +1,5 @@
 import ProductData from "../models/product.js";
 import fs from "fs"
-
 export const getProducts = async (req, res) => {
     try {
         const Products = await ProductData.find();
@@ -42,6 +41,7 @@ export const addProduct = async (req, res) => {
             description: productInData.description,
             category: productInData.category,
             price: productInData.price,
+            rating:Math.round((((Math.random() * 5) + 1) + Number.EPSILON) * 100) / 100,
             images: imageNames
         });
         res.status(200).json({
@@ -111,7 +111,7 @@ export const deleteProduct = async (req, res) => {
         console.log(Product.images);
         if(Product.images){
             Product.images.forEach(img => {
-                fs.unlinkSync("./upload/" + img); 
+                fs.unlinkSync("../upload/" + img); 
             });
         }
         await ProductData.deleteOne(Product);
@@ -123,6 +123,29 @@ export const deleteProduct = async (req, res) => {
         });
     } catch (error) {
         res.status(404).json({ message: error.message });
+        console.log(error);
+    }
+};
+
+export const deleteProducts = async (req, res) => {
+    try {
+        const Product = await ProductData.find();
+        Product.forEach(product => {
+            if (product.images) {
+                product.images.forEach(img => {
+                    fs.unlinkSync("./upload/" + img);
+                });
+            }
+        });
+        await ProductData.deleteMany({}); // Delete all products
+        res.status(200).json({
+            message: {
+                status: "success",
+                oldData: Product,
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
         console.log(error);
     }
 };

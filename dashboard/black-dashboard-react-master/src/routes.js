@@ -18,7 +18,7 @@
 import TableList from "views/TableList.js";
 import { addProductAction } from "views/UserProfile";
 import UserProfile from "views/UserProfile.js";
-
+import { loader as orderLoader } from "views/TableList";
 var routes = [
   {
     path: "/user-profile",
@@ -36,7 +36,7 @@ var routes = [
     icon: "tim-icons icon-puzzle-10",
     component: <TableList />,
     layout: "/admin",
-    action: getOrdersAction,
+    loader:orderLoader
   },
 ];
 export default routes;

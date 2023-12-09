@@ -18,6 +18,10 @@ const productSchema = new Schema({
     type:Number,
     required:true,
   },
+  rating:{
+    type:Number,
+    required:true,
+  },
   availableQuantity: Number,
   images: [
     {

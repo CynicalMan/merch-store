@@ -42,7 +42,7 @@ export const Register = async (req, res) => {
 
         res.json({
             accessToken,
-            email: user.email,
+            userID: user._id,
             name: user.name,
         });
     } catch (error) {
@@ -80,8 +80,8 @@ export const Login= async(req , res)=>
             sameSite: "None",
             maxAge: 1000 * 60 * 15, // Set the max age to match the access token expiration
         });
-        res.json({accessToken,email:foundUser.email ,
-        name:foundUser.name });
+        res.json({accessToken,userID:foundUser._id ,
+        name:foundUser.name, role: foundUser.role });
 
     } catch (error) {
         res.status(404).json({ message: error.message });

@@ -17,3 +17,13 @@ export const addProduct = async ({ title, description , category , price , image
     console.log(response);
     return response
 }
+
+export const getOrders = async () => {
+    const response = await fetch(
+      `http://localhost:4000/order/`
+    );
+    console.log(response);
+    const result = await response.json();
+    return result;
+  };
+  

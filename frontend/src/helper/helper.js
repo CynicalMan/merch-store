@@ -26,3 +26,22 @@ export const Auth = async ({ email, password }) => {
     return response
 }
 
+export const checkoutPost = async ({
+    userID,
+    products    
+
+}) => {
+    const orderData = {
+        userID: userID,
+        products:[    
+            {
+            productId: "6574865de37abea3eaf6597d",
+            quantity: 4
+            }
+        ]
+
+    }
+    console.log(orderData);
+    const response = await axios.post('http://localhost:4000/order/addOrder/',orderData);
+    return response
+};

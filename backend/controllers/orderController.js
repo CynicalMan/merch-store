@@ -66,7 +66,7 @@ export const addOrder = async (req, res) => {
     res.status(201).json({ message: 'Order created successfully', order: savedOrder });
 
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(404).json({ message: "catch error" });
   }
 };
 

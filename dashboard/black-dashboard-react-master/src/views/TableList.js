@@ -16,6 +16,8 @@
 
 */
 import React from "react";
+import { getOrders } from "../helper/helper";
+import { useLoaderData } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -28,7 +30,16 @@ import {
   Col,
 } from "reactstrap";
 
+export async function loader() {
+  const order = await getOrders();
+  console.log(order);
+  return {order};
+}
+
+
 function Tables() {
+  const {order} = useLoaderData()
+  console.log(order);
   return (
     <>
       <div className="content">
@@ -36,16 +47,16 @@ function Tables() {
           <Col md="12">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Simple Table</CardTitle>
+                <CardTitle tag="h4">Orders Table</CardTitle>
               </CardHeader>
               <CardBody>
                 <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                     <tr>
-                      <th>Name</th>
-                      <th>Country</th>
-                      <th>City</th>
-                      <th className="text-center">Salary</th>
+                      <th>Order</th>
+                      <th>Order</th>
+                      <th>Status</th>
+                      <th className="text-center">Total Amount</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -53,7 +64,7 @@ function Tables() {
                       <td>Dakota Rice</td>
                       <td>Niger</td>
                       <td>Oud-Turnhout</td>
-                      <td className="text-center">$36,738</td>
+                      <td className="text-center">36,738 EGP</td>
                     </tr>
                     <tr>
                       <td>Minerva Hooper</td>
