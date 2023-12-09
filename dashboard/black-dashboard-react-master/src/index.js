@@ -17,7 +17,7 @@
 */
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { Route, Navigate, createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 
 import AdminLayout from "layouts/Admin/Admin.js";
 import RTLLayout from "layouts/RTL/RTL.js";
@@ -31,21 +31,28 @@ import ThemeContextWrapper from "./components/ThemeWrapper/ThemeWrapper";
 import BackgroundColorWrapper from "./components/BackgroundColorWrapper/BackgroundColorWrapper";
 import { addProductAction } from "views/UserProfile";
 
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/admin/*" element={<AdminLayout />} action={addProductAction} />
+      <Route path="/rtl/*" element={<RTLLayout />} />
+      <Route
+        path="*"
+        element={<Navigate to="/admin/dashboard" replace />}
+      />
+    </Route>
+  )
+);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <ThemeContextWrapper>
-    <BackgroundColorWrapper>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/admin/*" element={<AdminLayout />} action={addProductAction} />
-          <Route path="/rtl/*" element={<RTLLayout />} />
-          <Route
-            path="*"
-            element={<Navigate to="/admin/dashboard" replace />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </BackgroundColorWrapper>
-  </ThemeContextWrapper>
+  <React.StrictMode>
+    <ThemeContextWrapper>
+      <BackgroundColorWrapper>
+        <RouterProvider router={router} />
+      </BackgroundColorWrapper>
+    </ThemeContextWrapper>
+  </React.StrictMode>
 );

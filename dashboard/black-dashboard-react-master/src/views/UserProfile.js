@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { addProduct } from "../helper/helper";
 import React from "react";
 import { useFetcher } from "react-router-dom";
@@ -35,9 +35,9 @@ import {
   Col,
 } from "reactstrap";
 export async function addProductAction({ request }) {
+  console.log(request);
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-  console.log(request);
   if (_action === "addProductAction") {
     try {
       console.log(values);
@@ -46,7 +46,7 @@ export async function addProductAction({ request }) {
         description: values.description,
         category: values.category,
         price: values.price,
-        image: values.image,
+        images: data.getAll("images"),
       });
       console.log(resp);
       return resp;
@@ -55,6 +55,9 @@ export async function addProductAction({ request }) {
     }
   }
 }
+
+
+
 function UserProfile() {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
@@ -119,6 +122,7 @@ function UserProfile() {
                           id="image"
                           name="image"
                           type="file"
+                          multiple
                         />
                       </FormGroup>
                     </Col>

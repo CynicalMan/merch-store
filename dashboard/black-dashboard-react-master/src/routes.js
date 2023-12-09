@@ -27,6 +27,7 @@ var routes = [
     icon: "tim-icons icon-single-02",
     component: <UserProfile />,
     layout: "/admin",
+    action: addProductAction
   },
   {
     path: "/tables",
