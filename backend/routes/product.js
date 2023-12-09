@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/", getProducts);
 router.get("/getProduct/:id", getProduct);
-router.post("/addProduct", verifyJWT(["admin"]),upload.array("images"), addProduct);
+router.post("/addProduct",upload.array("images"), addProduct);
 router.put("/updateProduct/:id", verifyJWT(["admin"]),upload.array("images"), updateProduct);
 router.delete("/deleteProduct/:id", verifyJWT(["admin"]), deleteProduct);
 
