@@ -16,7 +16,7 @@
 
 */
 import { useEffect, useRef, useState } from "react";
-import { addProduct } from "../helper/helper";
+import { addProduct, handleFiles } from "../helper/helper";
 import React from "react";
 import { useFetcher } from "react-router-dom";
 import "./UserProfile.css";
@@ -47,7 +47,6 @@ export async function addProductAction({ request }) {
         description: values.description,
         category: values.category,
         price: values.price,
-        images: data.getAll("image"),
       });
       console.log(resp);
       return resp;
@@ -72,6 +71,12 @@ function UserProfile() {
       focusRef.current.focus();
     }
   }, [isSubmitting]);
+
+  const handleFileChange = (e) => {
+      const resp = handleFiles({
+        files : Array.from(e.target.files)
+      })
+  }
 
   return (
     <>
@@ -124,6 +129,7 @@ function UserProfile() {
                           name="image"
                           type="file"
                           multiple
+                          onChange={handleFileChange}
                         />
                       </FormGroup>
                     </Col>
