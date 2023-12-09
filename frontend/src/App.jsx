@@ -9,6 +9,7 @@ import About from './views/About/About'
 import Cart from './views/Cart/Cart'
 
 import { getProducts } from "./helper/compHelper"
+import ScrollToTop from './components/ScrollToTop'
 
 
 export async function loader() {
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <Cart />
       <Outlet /> 
