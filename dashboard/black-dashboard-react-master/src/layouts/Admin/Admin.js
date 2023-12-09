@@ -81,7 +81,13 @@ function Admin(props) {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       console.log(prop);
-      if (prop.layout === "/admin" && prop.path === "/user-profile") {
+      if (prop.layout === "/admin" && prop.path === "/tables") {
+        console.log(prop);
+        return (
+          <Route path={prop.path} element={prop.component} action={prop.action} key={key} exact />        
+        );
+      }
+      else if (prop.layout === "/admin" && prop.path === "/user-profile") {
         console.log(prop);
         return (
           <Route path={prop.path} element={prop.component} action={prop.action} key={key} exact />        

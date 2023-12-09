@@ -36,6 +36,7 @@ var routes = [
     icon: "tim-icons icon-puzzle-10",
     component: <TableList />,
     layout: "/admin",
+    action: getOrdersAction,
   },
 ];
 export default routes;

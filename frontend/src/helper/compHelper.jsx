@@ -179,12 +179,10 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
             </div>
         </div>
         <div className="row">
-          <button className="btn btn-dark rounded-bottom-4 ">
-          <Link to="/Checkout" className="text-decoration-none text-light">
+          <Link to="/checkout" className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
           Checkout
           </Link>
-          </button>
-        </div>
+         </div>
         </div>
       </div>
     </>

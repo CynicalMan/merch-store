@@ -41,6 +41,7 @@ export async function addProductAction({ request }) {
   if (_action === "addProductAction") {
     try {
       console.log(values);
+      console.log(data.getAll("image"));
       const resp = addProduct({
         title: values.title,
         description: values.description,
