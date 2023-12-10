@@ -7,7 +7,6 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, delItem } from "../redux/product/productSlice";
 import Cart from "../views/Cart/Cart";
-
 export const LoadingProducts = () => {
   return (
     <>
@@ -54,6 +53,7 @@ export const LoadingProducts = () => {
 export const LoadingProduct = () => {
   return (
     <>
+  
       <div className="col-md-6">
         <Skeleton height={460} />
       </div>
@@ -169,7 +169,7 @@ export const ShowProducts = ({ results }) => {
               <div className="col-xl-3 col-lg-4 col-x col-md-6 g-4 " key={res.id}>
                 <div className="card h-100 text-center p-4  border-2 shadow-sm">
                   <img
-                    src={"../../../backend/upload/"+res.images[0]}
+                    src={`../../backend/upload/${res.images[0]}`}
                     className="card-img-top p-sm-5"
                     height={250}
                     alt={res.title}

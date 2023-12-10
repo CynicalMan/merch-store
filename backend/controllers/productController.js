@@ -41,7 +41,7 @@ export const addProduct = async (req, res) => {
             description: productInData.description,
             category: productInData.category,
             price: productInData.price,
-            rating:Math.round((((Math.random() * 5) + 1) + Number.EPSILON) * 100) / 100,
+            rating:Math.round((((Math.random() * 5) ) + Number.EPSILON) * 100) / 100,
             images: imageNames
         });
         res.status(200).json({

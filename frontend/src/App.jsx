@@ -11,7 +11,6 @@ import Cart from './views/Cart/Cart'
 import { getProducts } from "./helper/compHelper"
 import ScrollToTop from './components/ScrollToTop'
 
-
 export async function loader() {
   const products = await getProducts();
   console.log(products);
