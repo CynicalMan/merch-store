@@ -37,16 +37,6 @@ const router = createBrowserRouter([
         loader: productLoader
       },
       {
-        path: "/signin",
-        element: <Signin />,
-        action: signinAction
-      },
-      {
-        path: "/signup",
-        element: <Signup />,
-        action: signupAction,
-      },
-      {
         path: "/about",
         element: <About />,
       },
@@ -56,6 +46,16 @@ const router = createBrowserRouter([
     path: "/checkout",
     element: <Checkout />,
     action:checkoutAction,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
+    action: signinAction
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+    action: signupAction,
   },
 ]);
 

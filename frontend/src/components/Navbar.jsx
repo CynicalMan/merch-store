@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { openCartBar } from '../redux/cart/cartSlice'
 import { useState } from 'react'
+import AuthService from '../services/AuthService'
 
 const Navbar = () => {
 
@@ -41,8 +42,9 @@ const Navbar = () => {
 
                     </ul>
                     <div className="buttons">
-                        <Link to={"/signup"} className="btn btn-outline-dark  "><FontAwesomeIcon icon={faUserPlus} className='me-1' />Register</Link>
-                        <Link to={"/signin"} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faArrowRightToBracket} className='me-2' />Login</Link>
+                        <Link to={"/signup"} onClick={() => {AuthService.logout()}} className="btn btn-outline-dark  "><FontAwesomeIcon icon={faUserPlus} className='me-1' />Register</Link>
+                        <Link to={"/signin"} onClick={() => {AuthService.logout()}} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faArrowRightToBracket} className='me-2' />Login</Link>
+                        { AuthService.isAuthenticated()  && <Link to={"/"} onClick={() => {AuthService.logout();window.location.reload()}} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faUserPlus} className='me-1' />Logout</Link>}
                         <button onClick={handleCartBar} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faCartShopping} className='me-1' />Cart ({products.totalQuantity})</button>
                     </div>
                 </div>

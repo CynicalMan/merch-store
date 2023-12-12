@@ -3,15 +3,15 @@ import { faCircleUser , faLock } from "@fortawesome/free-solid-svg-icons";
 import Bgimg from "../../assets/Sign/470x800.png"
 import { useEffect } from "react";
 import { useRef  } from "react";
-import {useFetcher} from "react-router-dom";
+import {redirect, useFetcher, useNavigate} from "react-router-dom";
 import { Link } from "react-router-dom";
 import { SignupPost } from "../../helper/helper";
+import AuthService from "../../services/AuthService";
 
 
 export async function signupAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-
     
   if (_action === "signupAction") {
       try {
@@ -22,8 +22,19 @@ export async function signupAction({ request }) {
           phone: values.phone,
           address: values.address,
         })
+        resp.then((res)=>{
+          const authToken = res.data.accessToken
+          const userID = res.data.userID
+          console.log(res);
+          AuthService.login({authToken , userID})
+        }).catch((err) => {
+          console.log(err);
+        })
         console.log(resp);
-        return resp
+        if (AuthService.isAuthenticated()) {
+          return redirect("/")
+        }
+        return redirect("/signup")
       } catch (e) {
           throw new Error("There was a problem in sign up" + e);
       }
@@ -32,7 +43,7 @@ export async function signupAction({ request }) {
 
 
 const Signup = () => {
-  
+
   const fetcher = useFetcher()
   const isSubmitting = fetcher.state === "submitting"
 
