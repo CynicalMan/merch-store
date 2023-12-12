@@ -1,29 +1,42 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import Bgimg from "../../assets/Sign/470x800.png"
-import { Link, useFetcher } from "react-router-dom";
+import { Link, redirect, useFetcher, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { Auth } from "../../helper/helper";
+import AuthService from "../../services/AuthService";
 
 export async function signinAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-  
+
   if (_action === "signinAction") {
     try {
       console.log(values);
-      const resp = Auth({
+
+      // Assuming Auth is an asynchronous function that returns a promise
+      const res = await Auth({
         email: values.email,
         password: values.password
-      })
-      console.log(resp);
-      return resp
-    }
-    catch (e) {
-      throw new Error("There was a problem in sign up " + e);
+      });
+
+      // Handle the response from Auth
+      const authToken = res.data.accessToken;
+      const userID = res.data.userID;
+      console.log(res);
+
+      // Call AuthService to set the login status and store tokens
+      AuthService.login({ authToken, userID });
+
+      // Redirect only after successful authentication
+      return redirect("/");
+    } catch (error) {
+      console.error("Error in sign-in:", error);
+      throw new Error("There was a problem in sign-in: " + error);
     }
   }
 }
+
 const Signin = () => {
   const fetcher = useFetcher()
   const isSubmitting = fetcher.state === "submitting"

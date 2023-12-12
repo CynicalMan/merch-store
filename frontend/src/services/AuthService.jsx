@@ -2,6 +2,9 @@ import Cookies from 'js-cookie';
 
 const AuthService = {
     login: (userData) => {
+        
+
+        const { authToken, userID } = userData;
         // Logic to authenticate user and set cookie upon successful login
         Cookies.set('authToken', userData.authToken , { expires: 1 }); // Set a cookie with an expiration of 1 day
         Cookies.set('userID', userData.userID , { expires: 1 }); // Set a cookie with an expiration of 1 day
