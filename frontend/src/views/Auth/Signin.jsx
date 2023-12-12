@@ -33,8 +33,8 @@ export async function signinAction({ request }) {
         return redirect("http://localhost:3000/admin/dashboard/")
       }else{return redirect("/")}
     } catch (error) {
-      console.error("Error in sign-in:", error);
-      throw new Error("There was a problem in sign-in: " + error);
+      window.alert("Error in sign-in:", error);
+      return null
     }
   }
 }
