@@ -7,6 +7,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, delItem } from "../redux/product/productSlice";
 import Cart from "../views/Cart/Cart";
+import AuthService from "../services/AuthService";
 export const LoadingProducts = () => {
   return (
     <>
@@ -115,9 +116,12 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
             </div>
         </div>
         <div className="row">
-          <Link to="/checkout" className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
+        {AuthService.isAuthenticated() && <Link to={"/checkout"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
           Checkout
-          </Link>
+          </Link>}
+          {!AuthService.isAuthenticated() && <Link to={"/signin"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
+          Checkout
+          </Link>}
          </div>
         </div>
       </div>
