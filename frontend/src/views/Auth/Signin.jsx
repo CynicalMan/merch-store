@@ -29,7 +29,9 @@ export async function signinAction({ request }) {
       AuthService.login({ authToken, userID });
 
       // Redirect only after successful authentication
-      return redirect("/");
+      if (res.data.role === "admin"){
+        return redirect("http://localhost:3000/admin/dashboard/")
+      }else{return redirect("/")}
     } catch (error) {
       console.error("Error in sign-in:", error);
       throw new Error("There was a problem in sign-in: " + error);

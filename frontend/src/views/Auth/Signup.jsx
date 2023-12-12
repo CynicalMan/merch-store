@@ -15,26 +15,18 @@ export async function signupAction({ request }) {
     
   if (_action === "signupAction") {
       try {
-        const resp = SignupPost({
+        const res = await SignupPost({
           email: values.email,
           password: values.password,
           name: values.name,
           phone: values.phone,
           address: values.address,
         })
-        resp.then((res)=>{
-          const authToken = res.data.accessToken
-          const userID = res.data.userID
-          console.log(res);
-          AuthService.login({authToken , userID})
-        }).catch((err) => {
-          console.log(err);
-        })
-        console.log(resp);
-        if (AuthService.isAuthenticated()) {
-          return redirect("/")
-        }
-        return redirect("/signup")
+        // Handle the response from Auth
+        const authToken = res.data.accessToken;
+        const userID = res.data.userID;
+        AuthService.login({ authToken, userID });
+        return redirect("/")
       } catch (e) {
           throw new Error("There was a problem in sign up" + e);
       }

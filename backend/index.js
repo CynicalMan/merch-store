@@ -7,6 +7,7 @@ import productRoutes from "./routes/product.js"
 import authRoutes from "./routes/user.js"
 import orderRoutes from "./routes/order.js"
 import cors from "cors";
+import path from "path";
 import helmet from "helmet";
 
 dotenv.config()
@@ -26,7 +27,8 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(cors( {
   credentials: true,
 } ));
-
+const uploadsDirectory = path.resolve('upload'); 
+app.use('/uploads', express.static(uploadsDirectory));
 app.use("/product", productRoutes)
 app.use("/auth",authRoutes)
 app.use("/order",orderRoutes)
