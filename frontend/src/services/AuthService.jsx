@@ -18,6 +18,10 @@ const AuthService = {
         // Check if the authentication cookie exists
         return Cookies.get('authToken') !== undefined;
     },
+    getUserId: () => {
+        return Cookies.get('userID') 
+    },
+    
 };
 
 export default AuthService;

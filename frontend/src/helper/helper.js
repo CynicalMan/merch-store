@@ -26,10 +26,10 @@ export const Auth = async ({ email, password }) => {
     return response
 }
 
-export const checkoutPost = async ({ userData
-}) => {
+export const checkoutPost = async ({ userData }) => {
     const orderData = userData
     console.log(orderData);
     const response = await axios.post('http://localhost:4000/order/addOrder/',orderData);
+    console.log(response);
     return response
 };

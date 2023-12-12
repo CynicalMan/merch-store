@@ -10,42 +10,40 @@ import {checkoutPost} from "../../helper/helper"
 import { useFetcher } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef  } from "react";
-export async function checkoutAction(values) {
-  console.log(values);
+import AuthService from "../../services/AuthService";
 
+export async function checkoutAction(values, userID) {
+  console.log(values)
   try {
     const products = [];
-
     values.forEach((res) => {
-      const _id = res._id;
-      const qty = res.qty;
-      products.push({ _id, qty });
+      products.push({ productId : res._id , quantity : res.qty });
     });
-
+    console.log(products);
     const userData = {
-      userID: "6570cf179f775372991b7c52",
-      products: products,
+      "userID": userID,
+      "products": products,
     };
+    console.log(userData);
     const resp = await checkoutPost({ userData }); // Assuming checkoutPost is an async function
     console.log(resp);
     return resp;
   } catch (e) {
     console.error("Error in placing order:", e);
-    throw new Error("There was a problem in placing order");
+    throw new Error(e);
   }
 }
 
 const Checkout = () => {
+    const userID = AuthService.getUserId();  
     const fetcher = useFetcher()
     const isSubmitting = fetcher.state === "submitting"
-  
     const formRef = useRef()
     useEffect(() => {
       if (!isSubmitting) {
         formRef.current.reset()
       }
     }, [isSubmitting]);
-    
 
 
     const dispatch = useDispatch();
@@ -56,8 +54,13 @@ const Checkout = () => {
     (state) => state.products
   );
   console.log(value);
-  const cart = useSelector((state) => state.cartState.value);
-  checkoutAction(value)
+  if (!Array.isArray(value)) {
+    console.error("Invalid 'value'. It should be an array.");
+    // You might want to handle this case appropriately, e.g., show an error message.
+    return null;
+  }
+
+  console.log(value);
   
   return (
     <>
@@ -217,7 +220,7 @@ const Checkout = () => {
               <hr className="mb-4" />
               <div className="row text-center">
               <input type="hidden" name="_action" value="checkoutAction"  />
-              <button type="submit" className="btn btn-outline-dark" disabled={isSubmitting}>
+              <button type="submit" onClick={()=>{checkoutAction(value,userID)}} className="btn btn-outline-dark" disabled={isSubmitting}>
                     {
                       isSubmitting ? <span>Placing order...</span> : (<><span>Place order</span></>)
                     }
