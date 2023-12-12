@@ -135,6 +135,8 @@ export const RoundingNumber = (number)=>{
   return Math.round((number + Number.EPSILON) * 100) / 100;
 };
 
+
+
 export const ShowProducts = ({ results }) => {
   const [products, setProducts] = useState(results);
   
@@ -185,7 +187,7 @@ export const ShowProducts = ({ results }) => {
                   <div className="card-body">
                     <h5 className="card-title mb-0 text-truncate">{res.title}</h5>
                     <p className="card-text lead fw-bold">{res.price} EGP</p>
-                    { AuthService.isAuthenticated?
+                    { !AuthService.isAuthenticated?
                     <Link
                       to={`/signin`}
                       className="btn btn-outline-dark"
@@ -208,34 +210,6 @@ export const ShowProducts = ({ results }) => {
       );
 };
 
-
-
-export async function checkoutFunction() {
-  const { value } = useSelector(
-    (state) => state.products
-  );
-  const userID = AuthService.getUserId();  
-  console.log(value);
-  console.log(value)
-  try {
-    const products = [];
-    value.forEach((res) => {
-      products.push({ productId : res._id , quantity : res.qty });
-    });
-    console.log(products);
-    const userData = {
-      "userID": userID,
-      "products": products,
-    };
-    console.log(userData);
-    const resp = await checkoutPost({ userData }); // Assuming checkoutPost is an async function
-    console.log(resp);
-    return resp;
-  } catch (e) {
-    console.error("Error in placing order:", e);
-    throw new Error(e);
-  }
-}
 
 
 export const ShowProduct = ({ product }) => {

@@ -10,8 +10,42 @@ import { useFetcher } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef  } from "react";
 import AuthService from "../../services/AuthService";
+import { IOrderData, checkoutPost, getOrderLocalStorage } from "../../helper/helper";
+
+export async function checkoutFunction({request}) {
+  const data = await request.formData()
+  const {_action , ...values} = Object.fromEntries(data);
+  console.log(values);
+  if(_action == "checkoutAction")
+  {
+    try 
+    {
+      const userData = IOrderData()
+      const resp = checkoutPost({userData : userData})
+      window.alert("Order Placed")
+      console.log(resp);
+      return resp
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
 
 const Checkout = () => {
+
+  const { value } = useSelector(
+    (state) => state.products
+  );
+    const userID = AuthService.getUserId();  
+
+      const handleDataFromLocal = ()=>{
+        const { value } = useSelector(
+          (state) => state.products
+        );
+        const ls = getOrderLocalStorage({ value : value , userID : userID })
+        console.log(value);
+      }
     const fetcher = useFetcher()
     const isSubmitting = fetcher.state === "submitting"
     const formRef = useRef()
@@ -183,7 +217,8 @@ const Checkout = () => {
               </div>
               <hr className="mb-4" />
               <div className="row text-center">
-              <button type="submit"  className="btn btn-outline-dark" disabled={isSubmitting}>
+                <input type="hidden" name="_action" value="checkoutAction" />
+              <button type="submit" onClick={handleDataFromLocal()}  className="btn btn-outline-dark" disabled={isSubmitting}>
                     {
                       isSubmitting ? <span>Placing order...</span> : (<><span>Place order</span></>)
                     }

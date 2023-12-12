@@ -9,7 +9,7 @@ import {Provider} from "react-redux"
 import { store } from './redux/store.js'
 import Signin, { signinAction } from './views/Auth/Signin.jsx'
 import Signup, { signupAction }  from './views/Auth/Signup.jsx'
-import Checkout from './views/Checkout/Checkout.jsx'
+import Checkout, { checkoutFunction } from './views/Checkout/Checkout.jsx'
 import About from './views/About/About.jsx'
 import Products ,{ loader as productsLoader } from './views/Products/Products.jsx'
 import Home ,{ loader as homeLoader }from './views/Home/Home.jsx'
@@ -44,6 +44,7 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <Checkout />,
+    action: checkoutFunction
   },
   {
     path: "/signin",
