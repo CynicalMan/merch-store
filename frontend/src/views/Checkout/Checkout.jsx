@@ -24,6 +24,7 @@ export async function checkoutFunction({request}) {
       const resp = checkoutPost({userData : userData})
       window.alert("Order Placed")
       console.log(resp);
+      localStorage.clear()
       return resp
     } catch (error) {
       console.log(error);
