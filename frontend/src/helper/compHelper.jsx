@@ -121,8 +121,8 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
         {AuthService.isAuthenticated() && <Link to={"/checkout"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
           Checkout
           </Link>}
-          {!AuthService.isAuthenticated() && <Link to={"/signin"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
-          Login to add products
+          {!AuthService.isAuthenticated() && <Link to={"/signup"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
+          Register to add products
           </Link>}
          </div>
         </div>
@@ -189,7 +189,7 @@ export const ShowProducts = ({ results }) => {
                     <p className="card-text lead fw-bold">{res.price} EGP</p>
                     { AuthService.isAuthenticated?
                     <Link
-                      to={`/signin`}
+                      to={`/signup`}
                       className="btn btn-outline-dark"
                     >
                       Buy Now
