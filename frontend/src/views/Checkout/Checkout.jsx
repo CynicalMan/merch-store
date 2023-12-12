@@ -86,7 +86,7 @@ const Checkout = () => {
                   <li className="list-group-item d-flex justify-content-between lh-condensed" key={res._id}>
                     <div className="row rounded-3 d-flex h-50 p-2 border-bottom-1 shadow-sm w-100">
                       <div className="col-4 ">
-                        <img src={res.image} className="w-100 " alt="" />
+                        <img src={`http://localhost:4000/uploads/${res.images[0]}`} className="w-100 " alt="" />
                       </div>
                       <div className="col-8  ">
                         <div className="text-truncate">Title: {res.title}</div>

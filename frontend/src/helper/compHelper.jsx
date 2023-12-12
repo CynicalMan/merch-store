@@ -93,7 +93,7 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
               <div className="ms-2 p-2" key={res.id}>
                 <div className="row rounded-3 d-flex h-50 p-2 border border-2 shadow-sm">
                   <div className="col-4 " >
-                    <img src={res.image} className="w-100 " alt="" />
+                    <img src={`http://localhost:4000/uploads/${res.images[0]}`} className="w-100 " alt="" />
                   </div>
                   <div className="col-8  ">
                     <div className="text-truncate">Title: {res.title}</div>
@@ -116,15 +116,13 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
             </div>
         </div>
         <div className="row">
-          {
-            !AuthService.isAuthenticated?
-          <Link to="/checkout" className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
+          
+        {AuthService.isAuthenticated() && <Link to={"/checkout"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
           Checkout
-          </Link>:
-          <Link to="/signin" className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
-          Login to checkout
-          </Link>
-          }
+          </Link>}
+          {!AuthService.isAuthenticated() && <Link to={"/signin"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
+          Checkout
+          </Link>}
          </div>
         </div>
       </div>
@@ -138,7 +136,7 @@ export const RoundingNumber = (number)=>{
 
 export const ShowProducts = ({ results }) => {
   const [products, setProducts] = useState(results);
-  console.log(results[0].images[0]);
+  
   const filterProducts = (category) => {
     const updatedList = results.filter((x) => x.category === category);
         setProducts(updatedList);
