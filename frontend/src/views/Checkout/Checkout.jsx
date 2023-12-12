@@ -66,7 +66,7 @@ const Checkout = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-white border-2 border-bottom">
         <div className="container container-checkout">
-          <Link to={"/"} className="navbar-brand fw-semibold fs-3 py-2 px-3">Abo3amo Apparel</Link>
+          <Link to={"/"} className="fw-semibold fs-3 py-2 px-3 text-decoration-none text-black">Abo3amo Apparel</Link>
           <div className="btn btn-outline border-0">
             <FontAwesomeIcon className="" width={24} icon={faBagShopping} />
           </div>

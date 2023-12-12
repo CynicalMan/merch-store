@@ -116,6 +116,7 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
             </div>
         </div>
         <div className="row">
+          
         {AuthService.isAuthenticated() && <Link to={"/checkout"} className="btn btn-dark rounded-bottom-4  text-decoration-none text-light">
           Checkout
           </Link>}
@@ -183,12 +184,20 @@ export const ShowProducts = ({ results }) => {
                   <div className="card-body">
                     <h5 className="card-title mb-0 text-truncate">{res.title}</h5>
                     <p className="card-text lead fw-bold">{res.price} EGP</p>
+                    { AuthService.isAuthenticated?
+                    <Link
+                      to={`/signin`}
+                      className="btn btn-outline-dark"
+                    >
+                      Buy Now
+                    </Link>:
                     <Link
                       to={`/products/${res._id}`}
                       className="btn btn-outline-dark"
                     >
                       Buy Now
                     </Link>
+          }
                   </div>
                 </div>
               </div>
