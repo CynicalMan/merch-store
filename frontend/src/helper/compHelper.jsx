@@ -77,6 +77,8 @@ export const LoadingProduct = () => {
 export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.value)
+  console.log(products)
+  console.log(totalAmount)
   const delProductToCart = (prodId) => {
     dispatch(delItem(prodId));
   };
@@ -97,7 +99,7 @@ export const ShowCart = ({ cartItems , totalQuantity , totalAmount  }) => {
                     <div>SubTotal: {RoundingNumber(res.price * res.qty)} EGP</div>
                     <div className="d-flex justify-content-between pt-1">
                       <div className="col-3 w-50 mt-2">Qty: {res.qty} </div>
-                      <div className="col-8 w-50"> <button onClick={() => delProductToCart(res.id)} className="btn btn-dark btn-sm mt-1 ">Remove</button></div>
+                      <div className="col-8 w-50"> <button onClick={() => delProductToCart(res._id)} className="btn btn-dark btn-sm mt-1 ">Remove</button></div>
                   </div>
                   </div>
                 </div>

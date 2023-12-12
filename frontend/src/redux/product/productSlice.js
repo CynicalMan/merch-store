@@ -15,7 +15,10 @@ export const productSlice = createSlice({
     reducers: {
         addItem: (state,action) => {
             const product = action.payload;
-            const existIndex = state.value.findIndex((x) => x.id === product.id)
+            console.log(product);
+            console.log(state.value);
+            const existIndex = state.value.findIndex((x) => x._id === product._id)
+            console.log(existIndex);
             if (existIndex >= 0) {
                 state.value[existIndex].qty += 1;
             } else {
@@ -30,8 +33,8 @@ export const productSlice = createSlice({
         },
         delItem: (state,action) => {
             const productId = action.payload;
-            const existIndex = state.value.findIndex((x) => x.id === productId);
-            const product = state.value.find((x) => x.id === productId)
+            const existIndex = state.value.findIndex((x) => x._id === productId);
+            const product = state.value.find((x) => x._id === productId)
             if (existIndex >= 0) {
                 if (state.value[existIndex].qty === 1) {
                     state.value.splice(existIndex, 1);

@@ -62,7 +62,7 @@ const Checkout = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-white border-2 border-bottom">
         <div className="container container-checkout">
-          <h2 className="fw-semibold fs-3 py-2 px-3">Abo3amo Apparel</h2>
+          <Link to={"/"} className="fw-semibold fs-3 py-2 px-3 link">Abo3amo Apparel</Link>
           <div className="btn btn-outline border-0">
             <FontAwesomeIcon className="" width={24} icon={faBagShopping} />
           </div>
@@ -79,7 +79,7 @@ const Checkout = () => {
             <ul className="list-group mb-3">
               {value?.map((res) => {
                 return (
-                  <li className="list-group-item d-flex justify-content-between lh-condensed">
+                  <li className="list-group-item d-flex justify-content-between lh-condensed" key={res._id}>
                     <div className="row rounded-3 d-flex h-50 p-2 border-bottom-1 shadow-sm w-100">
                       <div className="col-4 ">
                         <img src={res.image} className="w-100 " alt="" />
@@ -94,7 +94,7 @@ const Checkout = () => {
                           <div className="col-8 w-50">
                             {" "}
                             <button
-                              onClick={() => delProductToCart(res.id)}
+                              onClick={() => delProductToCart(res._id)}
                               className="btn btn-dark btn-sm mt-1 "
                             >
                               Remove
