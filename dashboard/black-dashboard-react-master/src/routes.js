@@ -29,14 +29,5 @@ var routes = [
     layout: "/admin",
     action: addProductAction
   },
-  {
-    path: "/tables",
-    name: "Users / Orders",
-    rtlName: "قائمة الطلبات و المستخدمين",
-    icon: "tim-icons icon-puzzle-10",
-    component: <TableList />,
-    layout: "/admin",
-    loader:orderLoader
-  },
 ];
 export default routes;

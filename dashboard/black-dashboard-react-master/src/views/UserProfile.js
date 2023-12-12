@@ -18,7 +18,7 @@
 import { useEffect, useRef, useState } from "react";
 import { addProduct, handleFiles } from "../helper/helper";
 import React from "react";
-import { useFetcher } from "react-router-dom";
+import { Link, useFetcher, useNavigate } from "react-router-dom";
 import "./UserProfile.css";
 // reactstrap components
 import {
@@ -34,6 +34,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import AuthService from "services/AuthService";
 export async function addProductAction({ request }) {
   console.log(request);
   const data = await request.formData();
@@ -61,7 +62,7 @@ export async function addProductAction({ request }) {
 function UserProfile() {
   const fetcher = useFetcher();
   const isSubmitting = fetcher.state === "submitting";
-
+  const navigate = useNavigate()
   const formRef = useRef();
   const focusRef = useRef();
 
@@ -78,6 +79,7 @@ function UserProfile() {
       })
   }
 
+
   return (
     <>
       <div className="content margin-width">
@@ -86,6 +88,7 @@ function UserProfile() {
             <Card className="">
               <CardHeader>
                 <h5 className="title text-center">Add Product</h5>
+                { AuthService.isAuthenticated()  && <Link to="http://localhost:5173/signin/" onClick={() => {AuthService.logout();}} className="btn btn-outline-dark ms-2">Logout</Link>}
               </CardHeader>
               <CardBody className="">
                 <fetcher.Form method="post" className="grid-sm" ref={formRef}>

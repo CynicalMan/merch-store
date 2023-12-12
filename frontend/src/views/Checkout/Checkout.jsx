@@ -25,6 +25,7 @@ export async function checkoutFunction({request}) {
       window.alert("Order Placed")
       console.log(resp);
       localStorage.clear()
+      window.location.reload()
       return resp
     } catch (error) {
       console.log(error);
