@@ -10,29 +10,30 @@ import {checkoutPost} from "../../helper/helper"
 import { useFetcher } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef  } from "react";
-export async function checkoutAction({ request }) {
-    const data = await request.formData();
-    const { _action, ...values } = Object.fromEntries(data);
-  
-      
-    if (_action === "checkoutAction") {
-        try {
-          const resp = checkoutPost({
-            userID: "6570cf179f775372991b7c52",
-            products:[    
-                {
-                productId: "6574865de37abea3eaf6597d",
-                quantity: 4
-                }
-            ] ,
-          })
-          console.log(resp);
-          return resp
-        } catch (e) {
-            throw new Error("There was a problem in placing order" + e);
-        }
-    }
+export async function checkoutAction(values) {
+  console.log(values);
+
+  try {
+    const products = [];
+
+    values.forEach((res) => {
+      const _id = res._id;
+      const qty = res.qty;
+      products.push({ _id, qty });
+    });
+
+    const userData = {
+      userID: "6570cf179f775372991b7c52",
+      products: products,
+    };
+    const resp = await checkoutPost({ userData }); // Assuming checkoutPost is an async function
+    console.log(resp);
+    return resp;
+  } catch (e) {
+    console.error("Error in placing order:", e);
+    throw new Error("There was a problem in placing order");
   }
+}
 
 const Checkout = () => {
     const fetcher = useFetcher()
@@ -56,7 +57,7 @@ const Checkout = () => {
   );
   console.log(value);
   const cart = useSelector((state) => state.cartState.value);
-
+  checkoutAction(value)
   
   return (
     <>
