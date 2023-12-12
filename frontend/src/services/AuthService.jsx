@@ -11,6 +11,7 @@ const AuthService = {
         // Logic to log out the user and remove the authentication cookie
         Cookies.remove('authToken');
         Cookies.remove('userID');
+        localStorage.clear()
     },
     isAuthenticated: () => {
         // Check if the authentication cookie exists
