@@ -42,8 +42,8 @@ const Navbar = () => {
 
                     </ul>
                     <div className="buttons">
-                        <Link to={"/signup"} onClick={() => {AuthService.logout()}} className="btn btn-outline-dark  "><FontAwesomeIcon icon={faUserPlus} className='me-1' />Register</Link>
-                        <Link to={"/signin"} onClick={() => {AuthService.logout()}} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faArrowRightToBracket} className='me-2' />Login</Link>
+                        { !AuthService.isAuthenticated()  && <Link to={"/signup"} onClick={() => {AuthService.logout()}} className="btn btn-outline-dark  "><FontAwesomeIcon icon={faUserPlus} className='me-1' />Register</Link>}
+                        { !AuthService.isAuthenticated()  && <Link to={"/signin"} onClick={() => {AuthService.logout()}} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faArrowRightToBracket} className='me-2' />Login</Link>}
                         { AuthService.isAuthenticated()  && <Link to={"/"} onClick={() => {AuthService.logout();window.location.reload()}} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faUserPlus} className='me-1' />Logout</Link>}
                         <button onClick={handleCartBar} className="btn btn-outline-dark ms-2"><FontAwesomeIcon icon={faCartShopping} className='me-1' />Cart ({products.totalQuantity})</button>
                     </div>
