@@ -12,7 +12,7 @@ import AuthService from "../../services/AuthService";
 export async function signupAction({ request }) {
   const data = await request.formData();
   const { _action, ...values } = Object.fromEntries(data);
-    
+  
   if (_action === "signupAction") {
       try {
         const res = await SignupPost({
@@ -28,7 +28,8 @@ export async function signupAction({ request }) {
         AuthService.login({ authToken, userID });
         return redirect("/")
       } catch (e) {
-          throw new Error("There was a problem in sign up" + e);
+           window.alert("Email already exists")
+           return null
       }
   }
 }
