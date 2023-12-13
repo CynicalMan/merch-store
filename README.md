@@ -1,6 +1,14 @@
 # Merch-store using MERN Stack
 This repository contains the source code for a Merch Store application. The application is designed to showcase a simple online merchandise store.
 
+Preview of the website
+
+
+https://github.com/CynicalMan/merch-store/assets/95493823/97b88ece-7bb5-4fee-a379-052d5c39a93c
+
+
+
+
 # Getting Started
 Follow these steps to get the project up and running on your local machine.
 
