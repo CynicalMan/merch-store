@@ -1,0 +1,34 @@
+/* Utilities */
+
+.h-100vh{
+    width: 905px;
+    height: 650px;
+}
+
+/* Utilities */
+.pointer1{
+    cursor: pointer;
+}
+/* Navbar */
+.navbar-nav a{
+    font-size: 1.1em;
+}
+.underline-input {
+    border: none; /* Remove default borders */
+    border-bottom: 2px solid  black; /* Add a solid blue underline */
+    padding: 5px 8px; /* Add padding for better appearance */
+    outline: none; /* Remove outline when focused */
+    background-color: transparent; /* Make background transparent */
+    width: 150px; /* Set a fixed width or adjust as needed */
+  }
+.animate{
+    background-color: rgb(62, 121, 228);
+}
+.animate-text{
+    transition: text-shadow 0s ease ;
+}
+.animate-text:hover{
+    text-shadow: 1px 1px 10px rgba(222, 184, 135, 0.196);
+}
+
+/* Navbar */

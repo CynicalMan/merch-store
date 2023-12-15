@@ -1,0 +1,11 @@
+
+.modal-backdrop {
+  --bs-backdrop-zindex: 1040;
+  --bs-backdrop-bg: transparent;
+}
+
+.offcanvas.offcanvas-start {
+  right: 0;
+  left: auto;
+  transform: translateX(100%);
+}
